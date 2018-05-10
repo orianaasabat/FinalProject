@@ -14,6 +14,9 @@ import java.awt.event.ActionEvent;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
 import javax.swing.JRadioButton;
+import com.jgoodies.forms.layout.FormLayout;
+import com.jgoodies.forms.layout.ColumnSpec;
+import com.jgoodies.forms.layout.RowSpec;
 
 public class framee1 extends JFrame {
 	ArrayList<Person> persons = new ArrayList<Person>();
@@ -55,12 +58,13 @@ public class framee1 extends JFrame {
 				}
 			}
 		});
-	}
+	}// main
 
 	/**
 	 * Create the frame.
 	 */
 	public framee1() {
+		getContentPane().setLayout(new FormLayout(new ColumnSpec[] {}, new RowSpec[] {}));
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 780, 604);
 		contentPane = new JPanel();
@@ -181,6 +185,68 @@ public class framee1 extends JFrame {
 		btnSave_1.setBounds(359, 232, 115, 29);
 		panel_1.add(btnSave_1);
 
+		final JPanel panel_2 = new JPanel();
+		tabbedPane.addTab("Search", null, panel_2, null);
+		panel_2.setLayout(null);
+
+		final JRadioButton employeeCheck = new JRadioButton("employees");
+		employeeCheck.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				final JButton btnNext = new JButton("next");
+				btnNext.setBounds(608, 423, 115, 29);
+				panel_2.add(btnNext);
+				btnNext.addActionListener(new ActionListener() {
+					public void actionPerformed(ActionEvent e) {
+						if (employeeCheck.isSelected()) {
+							ArrayList<Employee> matchingNames = new ArrayList<Employee>();
+							for (Employee e1 : employees) {
+
+								if (name.equals(e1.getName())) {
+									matchingNames.add(e1);
+
+								} // if
+							} // for each
+							write.setText(matchingNames.get(0).getName());
+							int count = 1;
+							
+							while (count < matchingNames.size()) {
+								if (btnNext.getModel().isPressed()) {
+									write.setText(matchingNames.get(count).getName());
+									count++;
+								}
+								
+							} // while
+						} // if
+					}// if
+
+				});
+
+			}
+		});
+		employeeCheck.setBounds(11, 283, 155, 29);
+		panel_2.add(employeeCheck);
+
+		JRadioButton student = new JRadioButton("student");
+		student.setBounds(11, 320, 155, 29);
+		panel_2.add(student);
+
+		JRadioButton unl = new JRadioButton("keep it unlimited");
+		unl.setBounds(11, 357, 155, 29);
+		panel_2.add(unl);
+		JLabel lblName_1 = new JLabel("Name");
+		lblName_1.setBounds(327, 28, 69, 20);
+		panel_2.add(lblName_1);
+
+		name = new JTextField();
+		name.setBounds(445, 25, 146, 26);
+		panel_2.add(name);
+		name.setColumns(10);
+
+		write = new JTextField();
+		write.setBounds(327, 64, 343, 343);
+		panel_2.add(write);
+		write.setColumns(10);
+
 		JPanel panel = new JPanel();
 		tabbedPane.addTab("Add Employee", null, panel, null);
 		panel.setLayout(null);
@@ -258,66 +324,6 @@ public class framee1 extends JFrame {
 
 		JPanel panel_4 = new JPanel();
 		tabbedPane.addTab("Report", null, panel_4, null);
-
-		final JPanel panel_2 = new JPanel();
-		tabbedPane.addTab("Search", null, panel_2, null);
-		panel_2.setLayout(null);
-
-		JRadioButton employee = new JRadioButton("employees");
-		employee.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				final JButton btnNext = new JButton("next");
-				btnNext.setBounds(608, 423, 115, 29);
-				panel_2.add(btnNext);
-				btnNext.addActionListener(new ActionListener() {
-					public void actionPerformed(ActionEvent e) {
-						if (e.getSource() == btnNext) {
-							btnnext++;
-							int y = 0;
-							int i = 0;
-							int t = 0;
-							for (y = 0; y < employees.size(); y++) {
-
-								if (i < employees.size()) {
-
-									if (name.getText().equals(employees.get(i).getName())) {
-										System.out.println(employees.get(i).toString());
-									}
-									i++;
-									t++;
-								}
-
-							}
-						}
-					}
-
-				});
-
-			}
-		});
-		employee.setBounds(11, 283, 155, 29);
-		panel_2.add(employee);
-
-		JRadioButton student = new JRadioButton("student");
-		student.setBounds(11, 320, 155, 29);
-		panel_2.add(student);
-
-		JRadioButton unl = new JRadioButton("keep it unlimited");
-		unl.setBounds(11, 357, 155, 29);
-		panel_2.add(unl);
-		JLabel lblName_1 = new JLabel("Name");
-		lblName_1.setBounds(327, 28, 69, 20);
-		panel_2.add(lblName_1);
-
-		name = new JTextField();
-		name.setBounds(445, 25, 146, 26);
-		panel_2.add(name);
-		name.setColumns(10);
-
-		write = new JTextField();
-		write.setBounds(327, 64, 343, 343);
-		panel_2.add(write);
-		write.setColumns(10);
 
 		JButton btnExit = new JButton("Exit");
 		btnExit.addActionListener(new ActionListener() {
