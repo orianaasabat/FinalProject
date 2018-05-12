@@ -1,6 +1,6 @@
 package swerProject;
 
-public class Student extends Person {
+public class Student extends Person  {
 	int grade;
 	
 
@@ -27,6 +27,10 @@ public class Student extends Person {
 		return "Student [grade=" + grade + ", name=" + name + ", age=" + age + ", address: " + "\n city: "
 				+ address.getCity() + "\n house number " + address.getHouseNumber() + " \n Street name "
 				+ address.getStreetName() + "]";
+	}
+
+	public double compare(Object o, double num) {
+		return num- ((Student) o).getGrade() ;
 	}
 
 }
