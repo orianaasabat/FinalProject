@@ -1,6 +1,5 @@
 package swerProject;
-
-
+package budomain.swerproject;
 
 import java.awt.Color;
 import java.awt.EventQueue;
@@ -19,11 +18,11 @@ import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 import javax.swing.border.LineBorder;
 
-public class FinalProject extends JFrame {
+public class finalproject extends JFrame {
 	
 	private JPanel contentPane;
 	private JTextField username;
-	public static FinalProject frame;
+	public static finalproject frame;
 	private JPasswordField password;
 	private ImageIcon image;
 	private JLabel lbl;
@@ -35,7 +34,7 @@ public class FinalProject extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					frame = new FinalProject();
+					frame = new finalproject();
 					frame.setVisible(true);
 					frame.pack();
 				} catch (Exception e) {
@@ -49,7 +48,7 @@ public class FinalProject extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public FinalProject() {
+	public finalproject() {
 		setTitle("Login Screen");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 681, 475);
@@ -111,7 +110,7 @@ public class FinalProject extends JFrame {
 		contentPane.add(lblToTheProgram);
 		
 		JLabel lblNewLabel_2 = new JLabel(" ");
-		lblNewLabel_2.setIcon(new ImageIcon("C:\\Users\\TechZone\\eclipse-workspace\\swerproject\\src\\main\\java\\budomain\\swerproject\\download.jpg"));
+		lblNewLabel_2.setIcon(new ImageIcon(finalproject.class.getResource("/budomain/swerproject/download.jpg")));
 		lblNewLabel_2.setBounds(27, 0, 197, 240);
 		contentPane.add(lblNewLabel_2);
 		

@@ -2,7 +2,7 @@ package swerProject;
 
 public class Student extends Person {
 	int grade;
-	 
+	
 
 	public Student() {
 		super();
@@ -24,7 +24,9 @@ public class Student extends Person {
 
 	@Override
 	public String toString() {
-		return "Student [grade=" + grade + "]";
+		return "Student [grade=" + grade + ", name=" + name + ", age=" + age + ", address: " + "\n city: "
+				+ address.getCity() + "\n house number " + address.getHouseNumber() + " \n Street name "
+				+ address.getStreetName() + "]";
 	}
 
 }

@@ -3,7 +3,7 @@ package swerProject;
 public class Person {
 	String name;
 	int age;
-	public Address address;
+	public Address address= new Address();
 
 	public Person() {
 	}
@@ -40,3 +40,4 @@ public class Person {
 
 	}
 }
+
