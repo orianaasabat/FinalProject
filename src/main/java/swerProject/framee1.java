@@ -30,7 +30,10 @@ public class framee1 extends JFrame {
 	private JTextField studentName;
 	private JTextField studentage;
 	private JTextField studentgrade;
+	private JTextField salarytxt;
 	private JTextField studentcity;
+	public static framee1 frame;
+	private JLabel salary;
 	private JTextField studenthouse;
 	private JTextField studentstreet;
 	private JTextField employeename;
@@ -43,11 +46,12 @@ public class framee1 extends JFrame {
 	private JTextField password;
 	private JTextField name;
 	public static int i = 0;
+	public static int w =0;
 	public static JButton btnNext;
 	public static int btnnext = 0;
 	public static JTextArea write;
-	private JTextField salarytxt;
-	private JTextField reportedtxt;
+	private JTextField textField;
+	private JTextField textField_1;
 
 	/**
 	 * Launch the application.
@@ -182,7 +186,6 @@ public class framee1 extends JFrame {
 		btnSave_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				String name = studentName.getText();
-				// String age1 = studentAge.getText();
 				Integer age = Integer.valueOf(studentage.getText());
 				String city = studentcity.getText();
 				String street = studentstreet.getText();
@@ -302,7 +305,6 @@ public class framee1 extends JFrame {
 							write.setColumns(10);
 							String h = matchingNames.get(i) + " ";
 							write.setText(h);
-							// System.out.println(matchingNames.get(i));
 							btnNext.setEnabled(false);
 							i++;
 
@@ -419,84 +421,108 @@ public class framee1 extends JFrame {
 		panel_2.add(name);
 		name.setColumns(10);
 
-		JPanel panel_4 = new JPanel();
+		final JPanel panel_4 = new JPanel();
 		tabbedPane.addTab("Report", null, panel_4, null);
 		panel_4.setLayout(null);
-		salarytxt.setVisible(false);
-
-		salarytxt = new JTextField();
-		salarytxt.setBounds(90, 60, 130, 32);
-		panel_4.add(salarytxt);
-		salarytxt.setColumns(10);
-
-		JLabel theReport = new JLabel("Salary ");
-		theReport.setBounds(6, 65, 92, 23);
-		panel_4.add(theReport);
-
-		theReport.setVisible(false);
-		reportedtxt.setVisible(false);
-		reportedtxt = new JTextField();
-		reportedtxt.setBounds(6, 134, 327, 215);
-		panel_4.add(reportedtxt);
-		reportedtxt.setColumns(10);
-		reportedtxt.setVisible(false);
-		JLabel theReported = new JLabel("Reported Employees");
-		theReported.setBounds(6, 103, 130, 34);
-		panel_4.add(theReported);
-		theReported.setVisible(false);
-
-		JCheckBox employeeReport = new JCheckBox("Report Employees");
-		employeeReport.setBounds(6, 11, 153, 23);
+		 salarytxt = new JTextField();
+	     salarytxt.setBounds(13, 93, 146, 26);
+				panel_4.add(salarytxt);
+				salarytxt.setColumns(10);
+				final JLabel salary = new JLabel ("");
+				salary.setBounds(164, 103, 69, 20);
+				panel_4.add(salary);
+		final JCheckBox employeeReport = new JCheckBox("Report Employees");
+		employeeReport.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				if (e.getSource()==employeeReport) {
+		        salary.setText("salary");
+				String repo = salarytxt.getText();
+						Double report = Double.valueOf(repo);
+						final ArrayList<Employee> reportedEmployee = new ArrayList<Employee>();
+						
+							for (Employee h : employees) {
+								if (h.getSalary() > report) {
+									reportedEmployee.add(h);
+								} // if
+							} // for
+							for (final Employee o: reportedEmployee) {
+								final JButton next = new JButton("next");
+								next.setBounds(528, 409, 115, 29);
+								panel_4.add(next);
+								next.addActionListener(new ActionListener() {
+							    public void actionPerformed(ActionEvent e) {
+								if(e.getSource()==next) {
+								JTextField reportedtxt = new JTextField();
+								reportedtxt.setBounds(444, 151,400, 26);
+								panel_4.add(reportedtxt);
+								reportedtxt.setColumns(10);
+								reportedtxt.setText("name is "+o.getName() + "his / her salary " + o.getSalary());
+								next.setEnabled(false);
+								w++;
+								
+								}
+								if(w==reportedEmployee.size()) {
+									next.setEnabled(false);
+									return;
+								}
+								next.setEnabled(true);
+									}
+								});
+								
+							} // for
+						} // else if 1
+					}
+			
+		});
+		employeeReport.setBounds(6, 11, 235, 23);
 		panel_4.add(employeeReport);
 
-		JCheckBox studentReport = new JCheckBox("Report Students");
+		final JCheckBox studentReport = new JCheckBox("Report Students");
+		studentReport.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				if (e.getSource()==studentReport) {
+			        salary.setText("grade");
+					String grade1 = salarytxt.getText();
+							Double grade = Double.valueOf(grade1);
+							final ArrayList<Student> reportedEmployee = new ArrayList<Student>();
+							 
+								for (Student h : students) {
+									if (h.getGrade() > grade) {
+										reportedEmployee.add(h);
+									} // if
+								} // for
+								for (final Student o: reportedEmployee) {
+									final JButton next = new JButton("next");
+									next.setBounds(528, 409, 115, 29);
+									panel_4.add(next);
+									next.addActionListener(new ActionListener() {
+								    public void actionPerformed(ActionEvent e) {
+									if(e.getSource()==next) {
+									JTextField reportedtxt = new JTextField();
+									reportedtxt.setBounds(444, 151, 400, 26);
+									
+									panel_4.add(reportedtxt);
+									reportedtxt.setColumns(10);
+									reportedtxt.setText("name is "+o.getName() + "his / her grade " + o.getGrade());
+									next.setEnabled(false);
+									w++;
+									
+									}
+									if(w==reportedEmployee.size()) {
+										next.setEnabled(false);
+										return;
+									}
+									next.setEnabled(true);
+										}
+									});
+									
+								} // for
+							} // else if 1
+						}
+				
+			});
 		studentReport.setBounds(6, 37, 153, 23);
 		panel_4.add(studentReport);
-		if (employeeReport.isSelected()) {
-			theReport.setText("Salary");
-			theReported.setText("Reported Employees");
-			salarytxt.setVisible(true);
-			theReport.setVisible(true);
-			theReported.setVisible(true);
-			reportedtxt.setVisible(true);
-			double report = Double.parseDouble(salarytxt.getText());
-			ArrayList<Employee> reportedEmployee = new ArrayList<Employee>();
-			if (salarytxt.getText().equals("")) {
-				// JoptionPane
-			} else {
-				for (Employee e : employees) {
-					if (e.getSalary() > report) {
-						reportedEmployee.add(e);
-					} // if
-				} // for
-				for (Employee e1 : reportedEmployee) {
-					reportedtxt.setText(e1.getName() + "\n " + e1.getSalary());
-				} // for
-			} // else if 1
-		} else if (studentReport.isSelected()) {
-			theReport.setText("Grade");
-			theReported.setText("Reported Students");
-			salarytxt.setVisible(true);
-			theReport.setVisible(true);
-			theReported.setVisible(true);
-			reportedtxt.setVisible(true);
-			double report = Double.parseDouble(salarytxt.getText());
-			ArrayList<Student> reportedStudent = new ArrayList<Student>();
-			if (salarytxt.getText().equals("")) {
-				// JOptionPane.showMessageDialog(frame, "Decide the grade please");
-			} else {
-				for (Student e : students) {
-					if (e.getGrade() > report) {
-						reportedStudent.add(e);
-					} // if
-				} // for
-
-				for (Student e1 : reportedStudent) {
-					reportedtxt.setText(e1.getName() + "\n " + e1.getGrade());
-				} // for
-			} // else if
-		} // else if 2
-
 		JButton btnExit = new JButton("Exit");
 		btnExit.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
