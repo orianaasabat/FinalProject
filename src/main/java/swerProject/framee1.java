@@ -1,3 +1,4 @@
+
 package swerProject;
 
 import java.awt.BorderLayout;
@@ -27,6 +28,8 @@ public class framee1 extends JFrame {
 	ArrayList<Student> students = new ArrayList<Student>();
 	ArrayList<Employee> employees = new ArrayList<Employee>();
 	ArrayList<Adminstrator> admin = new ArrayList<Adminstrator>();
+	public static JButton update;
+	public static JButton saveUpdate;
 	private JPanel contentPane;
 	private JTextField studentName;
 	private JTextField studentage;
@@ -342,9 +345,6 @@ public class framee1 extends JFrame {
 		panel_2.add(streettxt);
 		streettxt.setColumns(10);
 
-		final JButton saveUpdate = new JButton("Save The Update");
-		saveUpdate.setBounds(81, 225, 127, 26);
-		panel_2.add(saveUpdate);
 		label.setVisible(false);
 		nametxt.setVisible(false);
 		label_1.setVisible(false);
@@ -352,7 +352,7 @@ public class framee1 extends JFrame {
 		label_3.setVisible(false);
 		label_4.setVisible(false);
 		label_5.setVisible(false);
-		saveUpdate.setVisible(false);
+		// saveUpdate.setVisible(false);
 		agetxt.setVisible(false);
 		gstxt.setVisible(false);
 		citytxt.setVisible(false);
@@ -409,8 +409,8 @@ public class framee1 extends JFrame {
 				btnNext.setBounds(608, 423, 115, 29);
 				panel_2.add(btnNext);
 				btnNext.addActionListener(new ActionListener() {
-					public void actionPerformed(ActionEvent e) {
 
+					public void actionPerformed(ActionEvent e) {
 						ArrayList<Student> matchingNames = new ArrayList<Student>();
 						for (Student e1 : students) {
 
@@ -435,6 +435,9 @@ public class framee1 extends JFrame {
 								return;
 							}
 						}
+						if (update.isSelected()) {
+							Updatebtn(matchingNames, i);
+						}
 						btnNext.setEnabled(true);
 
 					}
@@ -443,14 +446,17 @@ public class framee1 extends JFrame {
 
 			}
 		});
+
 		student.setBounds(11, 320, 155, 29);
 		panel_2.add(student);
-		final JButton update = new JButton("Update Information");
+		update = new JButton("Update Information");
+
 		update.setBounds(390, 360, 183, 23);
 		panel_2.add(update);
 
 		JRadioButton unl = new JRadioButton("keep it unlimited");
 		unl.addActionListener(new ActionListener() {
+
 			public void actionPerformed(ActionEvent e) {
 				final JButton btnNext = new JButton("next");
 				btnNext.setBounds(608, 423, 115, 29);
@@ -466,56 +472,7 @@ public class framee1 extends JFrame {
 								matchingNames.add(e1);
 
 						}
-						boolean student = false;
-						boolean employee = false;
-						if (update.isEnabled()) {
-							student = matchingNames.get(i) instanceof Student;
-							employee = matchingNames.get(i) instanceof Employee;
-							if (student) {
-								label_2.setText("Grade");
-							} else if (employee) {
-								label_2.setText("Salary");
-							}
-							label.setVisible(true);
-							nametxt.setVisible(true);
-							label_1.setVisible(true);
-							label_2.setVisible(true);
-							label_3.setVisible(true);
-							label_4.setVisible(true);
-							label_5.setVisible(true);
-							saveUpdate.setVisible(true);
-							agetxt.setVisible(true);
-							gstxt.setVisible(true);
-							citytxt.setVisible(true);
-							housetxt.setVisible(true);
-							streettxt.setVisible(true);
 
-						} // if update btn
-
-						if (!nametxt.getText().equals("")) {
-							matchingNames.get(i).setName(nametxt.getText());
-						}
-						if (!agetxt.getText().equals("")) {
-							matchingNames.get(i).setAge(Integer.parseInt(agetxt.getText()));
-						}
-						if (employee) {
-							if (!gstxt.getText().equals("")) {
-								((Employee) matchingNames.get(i)).setSalary(Integer.parseInt(gstxt.getText()));
-							}
-						} else if (student) {
-							if (!gstxt.getText().equals("")) {
-								((Student) matchingNames.get(i)).setGrade(Integer.parseInt(gstxt.getText()));
-							}
-							if (!citytxt.getText().equals("")) {
-								matchingNames.get(i).address.setCity(citytxt.getText());
-							}
-							if (!housetxt.getText().equals("")) {
-								matchingNames.get(i).address.setHouseNumber(housetxt.getText());
-							}
-							if (!streettxt.getText().equals("")) {
-								matchingNames.get(i).address.setStreetName(streettxt.getText());
-							}
-						}
 						if (e.getSource() == btnNext) {
 
 							write = new JTextArea();
@@ -565,6 +522,7 @@ public class framee1 extends JFrame {
 		panel_4.add(salary);
 		final JCheckBox employeeReport = new JCheckBox("Report Employees");
 		employeeReport.addActionListener(new ActionListener() {
+
 			public void actionPerformed1(ActionEvent e) {
 				if (e.getSource() == employeeReport) {
 					salary.setText("salary");
@@ -589,7 +547,8 @@ public class framee1 extends JFrame {
 									reportedtxt.setBounds(444, 151, 400, 26);
 									panel_4.add(reportedtxt);
 									reportedtxt.setColumns(10);
-									reportedtxt.setText("name is " + o.getName() + "his / her salary " + o.getSalary());
+									reportedtxt.setText("name is " + reportedEmployee.get(w).getName()
+											+ " his / her salary " + reportedEmployee.get(w).getSalary());
 									next.setEnabled(false);
 									w++;
 
@@ -620,14 +579,14 @@ public class framee1 extends JFrame {
 					salary.setText("grade");
 					String grade1 = salarytxt.getText();
 					Double grade = Double.valueOf(grade1);
-					final ArrayList<Student> reportedEmployee = new ArrayList<Student>();
+					final ArrayList<Student> reportedstuden = new ArrayList<Student>();
 
 					for (Student h : students) {
 						if (h.getGrade() > grade) {
-							reportedEmployee.add(h);
+							reportedstuden.add(h);
 						} // if
 					} // for
-					for (final Student o : reportedEmployee) {
+					for (final Student o : reportedstuden) {
 						final JButton next = new JButton("next");
 						next.setBounds(528, 409, 115, 29);
 						panel_4.add(next);
@@ -639,12 +598,13 @@ public class framee1 extends JFrame {
 
 									panel_4.add(reportedtxt);
 									reportedtxt.setColumns(10);
-									reportedtxt.setText("name is " + o.getName() + "his / her grade " + o.getGrade());
+									reportedtxt.setText("name is " + reportedstuden.get(w).getName()
+											+ " his / her grade " + reportedstuden.get(w).getGrade());
 									next.setEnabled(false);
 									w++;
 
 								}
-								if (w == reportedEmployee.size()) {
+								if (w == reportedstuden.size()) {
 									next.setEnabled(false);
 									return;
 								}
@@ -668,6 +628,76 @@ public class framee1 extends JFrame {
 
 		btnExit.setBounds(610, 504, 115, 45);
 		contentPane.add(btnExit);
+	}
+
+	private void Updatebtn(ArrayList<Object> matchingNames, int x) {
+		update.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				final ArrayList<Person> matchingNames = new ArrayList<Person>();
+				final JButton saveUpdate = new JButton("Save The Update");
+				boolean student = false;
+				boolean employee = false;
+
+				if (update.isEnabled()) {
+					student = matchingNames.get(x) instanceof Student;
+					employee = matchingNames.get(x) instanceof Employee;
+					if (student) {
+						label_2.setText("Grade");
+					} else if (employee) {
+						label_2.setText("Salary");
+					}
+					label.setVisible(true);
+					nametxt.setVisible(true);
+					label_1.setVisible(true);
+					label_2.setVisible(true);
+					label_3.setVisible(true);
+					label_4.setVisible(true);
+					label_5.setVisible(true);
+					saveUpdate.setVisible(true);
+					agetxt.setVisible(true);
+					gstxt.setVisible(true);
+					citytxt.setVisible(true);
+					housetxt.setVisible(true);
+					streettxt.setVisible(true);
+
+					saveUpdate.addActionListener(new ActionListener() {
+						public void actionPerformed(ActionEvent e) {
+							if (!nametxt.getText().equals("")) {
+								matchingNames.get(x).setName(nametxt.getText());
+							}
+							if (!agetxt.getText().equals("")) {
+								matchingNames.get(x).setAge(Integer.parseInt(agetxt.getText()));
+							}
+							if (matchingNames.get(x) instanceof Employee) {
+								if (!gstxt.getText().equals(""))
+									((Employee) matchingNames.get(x)).setSalary(Integer.parseInt(gstxt.getText()));
+							} else if (matchingNames.get(x) instanceof Student) {
+								if (!gstxt.getText().equals("")) {
+									((Student) matchingNames.get(x)).setGrade(Integer.parseInt(gstxt.getText()));
+								}
+							}
+
+							if (!citytxt.getText().equals("")) {
+								matchingNames.get(x).address.setCity(citytxt.getText());
+							}
+							if (!housetxt.getText().equals("")) {
+								matchingNames.get(x).address.setHouseNumber(housetxt.getText());
+							}
+							if (!streettxt.getText().equals("")) {
+								matchingNames.get(x).address.setStreetName(streettxt.getText());
+							}
+
+						}
+
+					});
+
+				}
+
+				saveUpdate.setBounds(81, 225, 127, 26);
+				panel_2.add(saveUpdate);
+			}
+
+		});
 	}
 
 	public void framee1() {
