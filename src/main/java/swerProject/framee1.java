@@ -1,4 +1,3 @@
-
 package swerProject;
 
 import java.awt.BorderLayout;
@@ -28,7 +27,15 @@ public class framee1 extends JFrame {
 	ArrayList<Student> students = new ArrayList<Student>();
 	ArrayList<Employee> employees = new ArrayList<Employee>();
 	ArrayList<Adminstrator> admin = new ArrayList<Adminstrator>();
+	public static JLabel label_2;
+	public static JLabel label;
+	public static JLabel label_5;
+	public static JLabel label_4;
+	public static JLabel label_1;
+	public static JLabel label_3;
+	public static JPanel panel_2;
 	public static JButton update;
+	public ArrayList<Student> matchingStudents;
 	public static JButton saveUpdate;
 	private JPanel contentPane;
 	private JTextField studentName;
@@ -44,10 +51,11 @@ public class framee1 extends JFrame {
 	private JTextField employeehouse;
 	private JTextField employeestreet;
 	private JTextField username;
+
 	private JTextField password;
 	private JTextField name;
 	public static int i = 0;
-
+	public static int y =0;
 	public static int w = 0;
 	public static JButton btnNext;
 	public static int btnnext = 0;
@@ -409,50 +417,104 @@ public class framee1 extends JFrame {
 				btnNext.setBounds(608, 423, 115, 29);
 				panel_2.add(btnNext);
 				btnNext.addActionListener(new ActionListener() {
-
 					public void actionPerformed(ActionEvent e) {
-						ArrayList<Student> matchingNames = new ArrayList<Student>();
+						matchingStudents = new ArrayList<Student>();
 						for (Student e1 : students) {
-
 							if ((name.getText()).equals(((Student) e1).getName()))
-								matchingNames.add(e1);
+								matchingStudents.add(e1);
 
 						}
 						if (e.getSource() == btnNext) {
-
+                          y = i;
 							write = new JTextArea();
 							write.setBounds(277, 107, 427, 320);
 							contentPane.add(write);
 							write.setColumns(10);
-							String h = matchingNames.get(i) + " ";
+							String h = matchingStudents.get(i) + " ";
+
 							write.setText(h);
-							// System.out.println(matchingNames.get(i));
+
 							btnNext.setEnabled(false);
-							i++;
+                         i++;
+						}
 
-							if (i == matchingNames.size()) {
-								btnNext.setEnabled(false);
-								return;
+						final JButton update2 = new JButton("Update information");
+						update2.setBounds(390, 360, 183, 23);
+						panel_2.add(update2);
+
+						update2.addActionListener(new ActionListener() {
+							public void actionPerformed(ActionEvent e) {
+								final JButton saveUpdate = new JButton("Save The Update");
+								saveUpdate.setBounds(81, 225, 127, 26);
+								panel_2.add(saveUpdate);
+								if (e.getSource() == update2) {
+
+									label_2.setText("Grade");
+
+									label.setVisible(true);
+									nametxt.setVisible(true);
+									label_1.setVisible(true);
+									label_2.setVisible(true);
+									label_3.setVisible(true);
+									label_4.setVisible(true);
+									label_5.setVisible(true);
+									saveUpdate.setVisible(true);
+									agetxt.setVisible(true);
+									gstxt.setVisible(true);
+									citytxt.setVisible(true);
+									housetxt.setVisible(true);
+									streettxt.setVisible(true);
+								}
+
+								saveUpdate.addActionListener(new ActionListener() {
+									public void actionPerformed(ActionEvent e) {
+										if (!nametxt.getText().equals("")) {
+											matchingStudents.get(y).setName(nametxt.getText());
+										}
+										if (!agetxt.getText().equals("")) {
+											matchingStudents.get(y).setAge(Integer.parseInt(agetxt.getText()));
+										}
+
+										if (!gstxt.getText().equals("")) {
+											((Student) matchingStudents.get(y))
+													.setGrade(Integer.parseInt(gstxt.getText()));
+										}
+
+										if (!citytxt.getText().equals("")) {
+											matchingStudents.get(y).address.setCity(citytxt.getText());
+										}
+										if (!housetxt.getText().equals("")) {
+											matchingStudents.get(y).address.setHouseNumber(housetxt.getText());
+										}
+										if (!streettxt.getText().equals("")) {
+											matchingStudents.get(y).address.setStreetName(streettxt.getText());
+										}
+
+									}
+
+								});
+								
+
 							}
-						}
-						if (update.isSelected()) {
-							Updatebtn(matchingNames, i);
-						}
-						btnNext.setEnabled(true);
 
+						});
+         
+						if (i == matchingStudents.size()) {
+							btnNext.setEnabled(false);
+							return;
+						}
+
+						btnNext.setEnabled(true);
 					}
 
 				});
 
 			}
+
 		});
 
 		student.setBounds(11, 320, 155, 29);
 		panel_2.add(student);
-		update = new JButton("Update Information");
-
-		update.setBounds(390, 360, 183, 23);
-		panel_2.add(update);
 
 		JRadioButton unl = new JRadioButton("keep it unlimited");
 		unl.addActionListener(new ActionListener() {
@@ -630,7 +692,7 @@ public class framee1 extends JFrame {
 		contentPane.add(btnExit);
 	}
 
-	private void Updatebtn(ArrayList<Object> matchingNames, int x) {
+	private void Updatebtn(ArrayList<Object> matchingNames, final int x) {
 		update.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				final ArrayList<Person> matchingNames = new ArrayList<Person>();
