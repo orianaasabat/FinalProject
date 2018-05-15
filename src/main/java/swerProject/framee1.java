@@ -3,7 +3,6 @@ package swerProject;
 import java.awt.BorderLayout;
 import java.awt.EventQueue;
 import java.awt.Window;
-
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
@@ -18,9 +17,6 @@ import javax.swing.JTextField;
 import javax.swing.JRadioButton;
 import javax.swing.JTextArea;
 import javax.swing.JCheckBox;
-//import com.jgoodies.forms.layout.FormLayout;
-//import com.jgoodies.forms.layout.ColumnSpec;
-//import com.jgoodies.forms.layout.RowSpec;
 
 public class framee1 extends JFrame {
 	ArrayList<Person> persons = new ArrayList<Person>();
@@ -36,6 +32,8 @@ public class framee1 extends JFrame {
 	public static JPanel panel_2;
 	public static JButton update;
 	public ArrayList<Student> matchingStudents;
+	public ArrayList<Person> matchingPersons;
+	public ArrayList<Employee> matchingEmployees;
 	public static JButton saveUpdate;
 	private JPanel contentPane;
 	private JTextField studentName;
@@ -51,11 +49,10 @@ public class framee1 extends JFrame {
 	private JTextField employeehouse;
 	private JTextField employeestreet;
 	private JTextField username;
-
 	private JTextField password;
 	private JTextField name;
 	public static int i = 0;
-	public static int y =0;
+	public static int y = 0;
 	public static int w = 0;
 	public static JButton btnNext;
 	public static int btnnext = 0;
@@ -92,7 +89,7 @@ public class framee1 extends JFrame {
 		// getContentPane().setLayout(new FormLayout(new ColumnSpec[] {}, new RowSpec[]
 		// {}));
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 780, 604);
+		setBounds(100, 100, 820, 705);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
@@ -100,7 +97,7 @@ public class framee1 extends JFrame {
 
 		JTabbedPane tabbedPane = new JTabbedPane(JTabbedPane.TOP);
 		tabbedPane.setToolTipText("Add Students");
-		tabbedPane.setBounds(15, 0, 743, 488);
+		tabbedPane.setBounds(15, 0, 783, 573);
 		contentPane.add(tabbedPane);
 
 		JPanel panel_3 = new JPanel();
@@ -202,7 +199,7 @@ public class framee1 extends JFrame {
 		btnSave_2.setBounds(344, 232, 115, 29);
 		panel.add(btnSave_2);
 		btnSave_2.addActionListener(new ActionListener() {
-			public void actionPerformed1(ActionEvent e) {
+			public void actionPerformed(ActionEvent e) {
 				String name = employeename.getText();
 				String age = (employeeage.getText());
 				Integer age1 = Integer.valueOf(age);
@@ -216,10 +213,7 @@ public class framee1 extends JFrame {
 				employees.add(new Employee(name, age1, u, salary));
 			}
 
-			public void actionPerformed(ActionEvent e) {
-				// TODO Auto-generated method stub
-
-			}
+			
 		});
 
 		JPanel panel_1 = new JPanel();
@@ -360,7 +354,6 @@ public class framee1 extends JFrame {
 		label_3.setVisible(false);
 		label_4.setVisible(false);
 		label_5.setVisible(false);
-		// saveUpdate.setVisible(false);
 		agetxt.setVisible(false);
 		gstxt.setVisible(false);
 		citytxt.setVisible(false);
@@ -369,73 +362,164 @@ public class framee1 extends JFrame {
 		final JRadioButton employeeCheck = new JRadioButton("employees");
 		employeeCheck.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				final JButton btnNext = new JButton("next");
-				btnNext.setBounds(608, 423, 115, 29);
-				panel_2.add(btnNext);
-				btnNext.addActionListener(new ActionListener() {
+				final JButton search = new JButton("Search");
+				search.setBounds(608, 423, 115, 29);
+				panel_2.add(search);
+				search.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
-
-						ArrayList<Employee> matchingNames = new ArrayList<Employee>();
+						matchingEmployees = new ArrayList<Employee>();
 						for (Employee e1 : employees) {
-
 							if ((name.getText()).equals(((Employee) e1).getName()))
-								matchingNames.add(e1);
-
+								matchingEmployees.add(e1);
 						}
-						if (e.getSource() == btnNext) {
-
+						if (e.getSource() == search) {
+							y = i;
 							write = new JTextArea();
-							write.setBounds(277, 107, 427, 320);
+							write.setBounds(475, 178, 227, 216);
 							contentPane.add(write);
 							write.setColumns(10);
-							String h = matchingNames.get(i) + " ";
+							String h = matchingEmployees.get(i) + " ";
 							write.setText(h);
-							// System.out.println(matchingNames.get(i));
-							btnNext.setEnabled(false);
-							i++;
+							final JButton next = new JButton("next");
+							next.setBounds(663, 345, 115, 29);
+							panel_2.add(next);
+							next.addActionListener(new ActionListener() {
+								public void actionPerformed(ActionEvent e) {
+									if (e.getSource() == next) {
+										try {
+											i++;
+											String h = matchingEmployees.get(i) + " ";
+											write.setText(h);
 
-							if (i == matchingNames.size()) {
-								btnNext.setEnabled(false);
-								return;
-							}
+										} catch (Exception e5) {
+											defaultframe t = new defaultframe();
+											JLabel labelerror = new JLabel(
+													"There is no other matching users for this name.");
+											labelerror.setBounds(15, 221, 520, 73);
+											t.getContentPane().add(labelerror);
+											t.setVisible(true);
+										}
+									}
+
+								}
+
+							});
 						}
-						btnNext.setEnabled(true);
+
+						final JButton update2 = new JButton("Update information");
+						update2.setBounds(390, 360, 183, 23);
+						panel_2.add(update2);
+
+						update2.addActionListener(new ActionListener() {
+							public void actionPerformed(ActionEvent e) {
+								final JButton saveUpdate = new JButton("Save The Update");
+								saveUpdate.setBounds(81, 225, 127, 26);
+								panel_2.add(saveUpdate);
+								if (e.getSource() == update2) {
+
+									label_2.setText("Salary");
+
+									label.setVisible(true);
+									nametxt.setVisible(true);
+									label_1.setVisible(true);
+									label_2.setVisible(true);
+									label_3.setVisible(true);
+									label_4.setVisible(true);
+									label_5.setVisible(true);
+									saveUpdate.setVisible(true);
+									agetxt.setVisible(true);
+									gstxt.setVisible(true);
+									citytxt.setVisible(true);
+									housetxt.setVisible(true);
+									streettxt.setVisible(true);
+								}
+
+								saveUpdate.addActionListener(new ActionListener() {
+									public void actionPerformed(ActionEvent e) {
+										if (!nametxt.getText().equals("")) {
+											matchingEmployees.get(y).setName(nametxt.getText());
+										}
+										if (!agetxt.getText().equals("")) {
+											matchingEmployees.get(y).setAge(Integer.parseInt(agetxt.getText()));
+										}
+
+										if (!gstxt.getText().equals("")) {
+											((Employee) matchingEmployees.get(y))
+													.setSalary(Integer.parseInt(gstxt.getText()));
+										}
+
+										if (!citytxt.getText().equals("")) {
+											matchingEmployees.get(y).address.setCity(citytxt.getText());
+										}
+										if (!housetxt.getText().equals("")) {
+											matchingEmployees.get(y).address.setHouseNumber(housetxt.getText());
+										}
+										if (!streettxt.getText().equals("")) {
+											matchingEmployees.get(y).address.setStreetName(streettxt.getText());
+										}
+										
+									}
+
+								});
+
+							}
+
+						});
 
 					}
 
 				});
-
 			}
+
 		});
-		employeeCheck.setBounds(11, 288, 155, 29);
+		employeeCheck.setBounds(10, 430, 155, 29);
 		panel_2.add(employeeCheck);
 
 		JRadioButton student = new JRadioButton("student");
 		student.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				final JButton btnNext = new JButton("next");
-				btnNext.setBounds(608, 423, 115, 29);
-				panel_2.add(btnNext);
-				btnNext.addActionListener(new ActionListener() {
+				final JButton search = new JButton("Search");
+				search.setBounds(608, 423, 115, 29);
+				panel_2.add(search);
+				search.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
 						matchingStudents = new ArrayList<Student>();
 						for (Student e1 : students) {
 							if ((name.getText()).equals(((Student) e1).getName()))
 								matchingStudents.add(e1);
-
 						}
-						if (e.getSource() == btnNext) {
-                          y = i;
+						if (e.getSource() == search) {
+							y = i;
 							write = new JTextArea();
-							write.setBounds(277, 107, 427, 320);
+							write.setBounds(475, 178, 227, 216);
 							contentPane.add(write);
 							write.setColumns(10);
 							String h = matchingStudents.get(i) + " ";
-
 							write.setText(h);
+							final JButton next = new JButton("next");
+							next.setBounds(663, 345, 115, 29);
+							panel_2.add(next);
+							next.addActionListener(new ActionListener() {
+								public void actionPerformed(ActionEvent e) {
+									if (e.getSource() == next) {
+										try {
+											i++;
+											String h = matchingStudents.get(i) + " ";
+											write.setText(h);
 
-							btnNext.setEnabled(false);
-                         i++;
+										} catch (Exception e5) {
+											defaultframe t = new defaultframe();
+											JLabel labelerror = new JLabel(
+													"There is no other matching users for this name.");
+											labelerror.setBounds(15, 221, 520, 73);
+											t.getContentPane().add(labelerror);
+											t.setVisible(true);
+										}
+									}
+
+								}
+
+							});
 						}
 
 						final JButton update2 = new JButton("Update information");
@@ -489,79 +573,148 @@ public class framee1 extends JFrame {
 										if (!streettxt.getText().equals("")) {
 											matchingStudents.get(y).address.setStreetName(streettxt.getText());
 										}
-
+										System.out.println(matchingStudents.get(y));
 									}
 
 								});
-								
 
 							}
 
 						});
-         
-						if (i == matchingStudents.size()) {
-							btnNext.setEnabled(false);
-							return;
-						}
 
-						btnNext.setEnabled(true);
 					}
 
 				});
-
 			}
 
 		});
 
-		student.setBounds(11, 320, 155, 29);
+		student.setBounds(11, 467, 155, 29);
 		panel_2.add(student);
 
 		JRadioButton unl = new JRadioButton("keep it unlimited");
 		unl.addActionListener(new ActionListener() {
-
 			public void actionPerformed(ActionEvent e) {
-				final JButton btnNext = new JButton("next");
-				btnNext.setBounds(608, 423, 115, 29);
-				panel_2.add(btnNext);
-
-				btnNext.addActionListener(new ActionListener() {
+				final JButton search = new JButton("Search");
+				search.setBounds(608, 423, 115, 29);
+				panel_2.add(search);
+				search.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
-
-						ArrayList<Person> matchingNames = new ArrayList<Person>();
-						for (Person e1 : persons) {
-
-							if ((name.getText()).equals(((Person) e1).getName()))
-								matchingNames.add(e1);
-
+						matchingPersons = new ArrayList<Person>();
+					for (Person e1 : persons) {
+						if ((name.getText()).equals(e1.getName()))
+								matchingPersons.add(e1);
 						}
-
-						if (e.getSource() == btnNext) {
-
+						if (e.getSource() == search) {
+							y = i;
 							write = new JTextArea();
-							write.setBounds(277, 107, 427, 320);
+							write.setBounds(475, 178, 227, 216);
 							contentPane.add(write);
 							write.setColumns(10);
-							String h = matchingNames.get(i) + " ";
+							String h = matchingPersons.get(i) + " ";
 							write.setText(h);
-							// System.out.println(matchingNames.get(i));
-							btnNext.setEnabled(false);
-							i++;
+							final JButton next = new JButton("next");
+							next.setBounds(663, 345, 115, 29);
+							panel_2.add(next);
+							next.addActionListener(new ActionListener() {
+								public void actionPerformed(ActionEvent e) {
+									if (e.getSource() == next) {
+										try {
+											i++;
+											String h = matchingPersons.get(i) + " ";
+											write.setText(h);
 
-							if (i == matchingNames.size()) {
-								btnNext.setEnabled(false);
-								return;
-							}
+										} catch (Exception e5) {
+											defaultframe t = new defaultframe();
+											JLabel labelerror = new JLabel(
+													"There is no other matching users for this name.");
+											labelerror.setBounds(15, 221, 520, 73);
+											t.getContentPane().add(labelerror);
+											t.setVisible(true);
+										}
+									}
+
+								}
+
+							});
 						}
-						btnNext.setEnabled(true);
+
+						final JButton update2 = new JButton("Update information");
+						update2.setBounds(390, 360, 183, 23);
+						panel_2.add(update2);
+
+						update2.addActionListener(new ActionListener() {
+							public void actionPerformed(ActionEvent e) {
+								final JButton saveUpdate = new JButton("Save The Update");
+								saveUpdate.setBounds(81, 225, 127, 26);
+								panel_2.add(saveUpdate);
+								if (e.getSource() == update2) {
+									if (matchingPersons.get(y) instanceof Student) {
+										label_2.setText("Grade");
+									}
+									else if(matchingPersons.get(y) instanceof Employee) {
+										label_2.setText("Salary");
+									}
+
+									label.setVisible(true);
+									nametxt.setVisible(true);
+									label_1.setVisible(true);
+									label_2.setVisible(true);
+									label_3.setVisible(true);
+									label_4.setVisible(true);
+									label_5.setVisible(true);
+									saveUpdate.setVisible(true);
+									agetxt.setVisible(true);
+									gstxt.setVisible(true);
+									citytxt.setVisible(true);
+									housetxt.setVisible(true);
+									streettxt.setVisible(true);
+								}
+
+								saveUpdate.addActionListener(new ActionListener() {
+									public void actionPerformed(ActionEvent e) {
+										if (!nametxt.getText().equals("")) {
+											matchingPersons.get(y).setName(nametxt.getText());
+										}
+										if (!agetxt.getText().equals("")) {
+											matchingPersons.get(y).setAge(Integer.parseInt(agetxt.getText()));
+										}
+
+										if (!gstxt.getText().equals("")) {
+											if (matchingPersons.get(y) instanceof Student) {
+												((Student) matchingStudents.get(y))
+														.setGrade(Integer.parseInt(gstxt.getText()));
+											} else if (matchingPersons.get(y) instanceof Employee) {
+												((Employee) matchingPersons.get(y))
+														.setSalary(Integer.parseInt(gstxt.getText()));
+											}
+										}
+
+										if (!citytxt.getText().equals("")) {
+											matchingPersons.get(y).address.setCity(citytxt.getText());
+										}
+										if (!housetxt.getText().equals("")) {
+											matchingPersons.get(y).address.setHouseNumber(housetxt.getText());
+										}
+										if (!streettxt.getText().equals("")) {
+											matchingPersons.get(y).address.setStreetName(streettxt.getText());
+										}
+									}
+
+								});
+
+							}
+
+						});
 
 					}
 
 				});
-
 			}
+
 		});
 
-		unl.setBounds(11, 357, 155, 29);
+		unl.setBounds(10, 498, 155, 29);
 		panel_2.add(unl);
 		JLabel lblName_1 = new JLabel("Name");
 		lblName_1.setBounds(327, 28, 69, 20);
@@ -571,7 +724,6 @@ public class framee1 extends JFrame {
 		name.setBounds(445, 25, 146, 26);
 		panel_2.add(name);
 		name.setColumns(10);
-
 		final JPanel panel_4 = new JPanel();
 		tabbedPane.addTab("Report", null, panel_4, null);
 		panel_4.setLayout(null);
@@ -688,78 +840,8 @@ public class framee1 extends JFrame {
 			}
 		});
 
-		btnExit.setBounds(610, 504, 115, 45);
+		btnExit.setBounds(683, 589, 115, 45);
 		contentPane.add(btnExit);
-	}
-
-	private void Updatebtn(ArrayList<Object> matchingNames, final int x) {
-		update.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				final ArrayList<Person> matchingNames = new ArrayList<Person>();
-				final JButton saveUpdate = new JButton("Save The Update");
-				boolean student = false;
-				boolean employee = false;
-
-				if (update.isEnabled()) {
-					student = matchingNames.get(x) instanceof Student;
-					employee = matchingNames.get(x) instanceof Employee;
-					if (student) {
-						label_2.setText("Grade");
-					} else if (employee) {
-						label_2.setText("Salary");
-					}
-					label.setVisible(true);
-					nametxt.setVisible(true);
-					label_1.setVisible(true);
-					label_2.setVisible(true);
-					label_3.setVisible(true);
-					label_4.setVisible(true);
-					label_5.setVisible(true);
-					saveUpdate.setVisible(true);
-					agetxt.setVisible(true);
-					gstxt.setVisible(true);
-					citytxt.setVisible(true);
-					housetxt.setVisible(true);
-					streettxt.setVisible(true);
-
-					saveUpdate.addActionListener(new ActionListener() {
-						public void actionPerformed(ActionEvent e) {
-							if (!nametxt.getText().equals("")) {
-								matchingNames.get(x).setName(nametxt.getText());
-							}
-							if (!agetxt.getText().equals("")) {
-								matchingNames.get(x).setAge(Integer.parseInt(agetxt.getText()));
-							}
-							if (matchingNames.get(x) instanceof Employee) {
-								if (!gstxt.getText().equals(""))
-									((Employee) matchingNames.get(x)).setSalary(Integer.parseInt(gstxt.getText()));
-							} else if (matchingNames.get(x) instanceof Student) {
-								if (!gstxt.getText().equals("")) {
-									((Student) matchingNames.get(x)).setGrade(Integer.parseInt(gstxt.getText()));
-								}
-							}
-
-							if (!citytxt.getText().equals("")) {
-								matchingNames.get(x).address.setCity(citytxt.getText());
-							}
-							if (!housetxt.getText().equals("")) {
-								matchingNames.get(x).address.setHouseNumber(housetxt.getText());
-							}
-							if (!streettxt.getText().equals("")) {
-								matchingNames.get(x).address.setStreetName(streettxt.getText());
-							}
-
-						}
-
-					});
-
-				}
-
-				saveUpdate.setBounds(81, 225, 127, 26);
-				panel_2.add(saveUpdate);
-			}
-
-		});
 	}
 
 	public void framee1() {
