@@ -16,7 +16,7 @@ class Adminstrator extends Person {
 
 	public Adminstrator() {
 		super();
-	}
+	 }
 	public String getUserName() {
 		return userName;
 	}

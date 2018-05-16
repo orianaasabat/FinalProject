@@ -6,9 +6,15 @@ import java.awt.Window;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+
+import org.json.JSONArray;
+
 import javax.swing.JTabbedPane;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.awt.event.ActionEvent;
 import javax.swing.JLabel;
@@ -22,7 +28,7 @@ public class framee1 extends JFrame {
 	ArrayList<Person> persons = new ArrayList<Person>();
 	ArrayList<Student> students = new ArrayList<Student>();
 	ArrayList<Employee> employees = new ArrayList<Employee>();
-	
+
 	public static JLabel label_2;
 	public static JLabel label;
 	public static JLabel label_5;
@@ -128,7 +134,7 @@ public class framee1 extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				String username1 = username.getText();
 				String password1 = password.getText();
-				Adminstrator admin = new Adminstrator(username1,password1); 
+				Adminstrator admin = new Adminstrator(username1, password1);
 			}
 		});
 		panel_3.add(btnSave);
@@ -207,13 +213,12 @@ public class framee1 extends JFrame {
 				String street = employeestreet.getText();
 				String house = employeehouse.getText();
 				String sal = employeesalary.getText();
-				Integer salary = Integer.valueOf(sal);
+				int salary = Integer.parseInt(sal);
 				Address u = new Address(city, street, house);
 				persons.add(new Employee(name, age1, u, salary));
 				employees.add(new Employee(name, age1, u, salary));
 			}
 
-			
 		});
 
 		JPanel panel_1 = new JPanel();
@@ -366,10 +371,10 @@ public class framee1 extends JFrame {
 		final JRadioButton employeeCheck = new JRadioButton("Employees");
 		employeeCheck.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-		
+
 				search.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
-		
+
 						matchingEmployees = new ArrayList<Employee>();
 						for (Employee e1 : employees) {
 							if ((name.getText()).equalsIgnoreCase(((Employee) e1).getName()))
@@ -383,8 +388,8 @@ public class framee1 extends JFrame {
 							write.setColumns(10);
 							String h = matchingEmployees.get(i) + " ";
 							System.out.println(h);
-						write.setText(h);
-							
+							write.setText(h);
+
 							next.setBounds(663, 345, 115, 29);
 							panel_2.add(next);
 							next.addActionListener(new ActionListener() {
@@ -406,7 +411,7 @@ public class framee1 extends JFrame {
 									}
 
 								}
-							
+
 							});
 						}
 
@@ -461,7 +466,7 @@ public class framee1 extends JFrame {
 										if (!streettxt.getText().equals("")) {
 											matchingEmployees.get(y).address.setStreetName(streettxt.getText());
 										}
-										
+
 									}
 
 								});
@@ -473,125 +478,124 @@ public class framee1 extends JFrame {
 					}
 
 				});
-	
-		}
-		
+
+			}
 
 		});
-		
+
 		employeeCheck.setBounds(10, 430, 155, 29);
 		panel_2.add(employeeCheck);
 
 		final JRadioButton student = new JRadioButton("student");
 		student.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-			if(e.getSource() == student) {
-				search.addActionListener(new ActionListener() {
-					public void actionPerformed(ActionEvent e) {
-						matchingStudents = new ArrayList<Student>();
-						for (Student e1 : students) {
-							if ((name.getText()).equalsIgnoreCase(((Student) e1).getName()))
-								matchingStudents.add(e1);
-						}
-			
-						if (e.getSource() == search) {
-							y = i;
-							write = new JTextArea();
-							write.setBounds(475, 178, 227, 216);
-							contentPane.add(write);
-							write.setColumns(10);
-							String h = matchingStudents.get(i) + " ";
-							write.setText(h);
-							
-							next.setBounds(663, 345, 115, 29);
-							panel_2.add(next);
-							next.addActionListener(new ActionListener() {
-								public void actionPerformed(ActionEvent e) {
-									if (e.getSource() == next) {
-										try {
-											i++;
-											String h = matchingStudents.get(i) + " ";
-											write.setText(h);
+				if (e.getSource() == student) {
+					search.addActionListener(new ActionListener() {
+						public void actionPerformed(ActionEvent e) {
+							matchingStudents = new ArrayList<Student>();
+							for (Student e1 : students) {
+								if ((name.getText()).equalsIgnoreCase(((Student) e1).getName()))
+									matchingStudents.add(e1);
+							}
 
-										} catch (Exception e5) {
-											defaultframe t = new defaultframe();
-											JLabel labelerror = new JLabel(
-													"There is no other matching users for this name.");
-											labelerror.setBounds(15, 221, 520, 73);
-											t.getContentPane().add(labelerror);
-											t.setVisible(true);
-										}
-									}
+							if (e.getSource() == search) {
+								y = i;
+								write = new JTextArea();
+								write.setBounds(475, 178, 227, 216);
+								contentPane.add(write);
+								write.setColumns(10);
+								String h = matchingStudents.get(i) + " ";
+								write.setText(h);
 
-								}
-							
-							});
-						}
-
-						final JButton update2 = new JButton("Update information");
-						update2.setBounds(390, 360, 183, 23);
-						panel_2.add(update2);
-
-						update2.addActionListener(new ActionListener() {
-							public void actionPerformed(ActionEvent e) {
-								final JButton saveUpdate = new JButton("Save The Update");
-								saveUpdate.setBounds(81, 225, 127, 26);
-								panel_2.add(saveUpdate);
-								if (e.getSource() == update2) {
-
-									label_2.setText("Grade");
-
-									label.setVisible(true);
-									nametxt.setVisible(true);
-									label_1.setVisible(true);
-									label_2.setVisible(true);
-									label_3.setVisible(true);
-									label_4.setVisible(true);
-									label_5.setVisible(true);
-									saveUpdate.setVisible(true);
-									agetxt.setVisible(true);
-									gstxt.setVisible(true);
-									citytxt.setVisible(true);
-									housetxt.setVisible(true);
-									streettxt.setVisible(true);
-								}
-
-								saveUpdate.addActionListener(new ActionListener() {
+								next.setBounds(663, 345, 115, 29);
+								panel_2.add(next);
+								next.addActionListener(new ActionListener() {
 									public void actionPerformed(ActionEvent e) {
-										if (!nametxt.getText().equals("")) {
-											matchingStudents.get(y).setName(nametxt.getText());
-										}
-										if (!agetxt.getText().equals("")) {
-											matchingStudents.get(y).setAge(Integer.parseInt(agetxt.getText()));
+										if (e.getSource() == next) {
+											try {
+												i++;
+												String h = matchingStudents.get(i) + " ";
+												write.setText(h);
+
+											} catch (Exception e5) {
+												defaultframe t = new defaultframe();
+												JLabel labelerror = new JLabel(
+														"There is no other matching users for this name.");
+												labelerror.setBounds(15, 221, 520, 73);
+												t.getContentPane().add(labelerror);
+												t.setVisible(true);
+											}
 										}
 
-										if (!gstxt.getText().equals("")) {
-											((Student) matchingStudents.get(y))
-													.setGrade(Integer.parseInt(gstxt.getText()));
-										}
-
-										if (!citytxt.getText().equals("")) {
-											matchingStudents.get(y).address.setCity(citytxt.getText());
-										}
-										if (!housetxt.getText().equals("")) {
-											matchingStudents.get(y).address.setHouseNumber(housetxt.getText());
-										}
-										if (!streettxt.getText().equals("")) {
-											matchingStudents.get(y).address.setStreetName(streettxt.getText());
-										}
-										System.out.println(matchingStudents.get(y));
 									}
 
 								});
-
 							}
 
-						});
+							final JButton update2 = new JButton("Update information");
+							update2.setBounds(390, 360, 183, 23);
+							panel_2.add(update2);
 
-					}
+							update2.addActionListener(new ActionListener() {
+								public void actionPerformed(ActionEvent e) {
+									final JButton saveUpdate = new JButton("Save The Update");
+									saveUpdate.setBounds(81, 225, 127, 26);
+									panel_2.add(saveUpdate);
+									if (e.getSource() == update2) {
 
-				});
-			}
+										label_2.setText("Grade");
+
+										label.setVisible(true);
+										nametxt.setVisible(true);
+										label_1.setVisible(true);
+										label_2.setVisible(true);
+										label_3.setVisible(true);
+										label_4.setVisible(true);
+										label_5.setVisible(true);
+										saveUpdate.setVisible(true);
+										agetxt.setVisible(true);
+										gstxt.setVisible(true);
+										citytxt.setVisible(true);
+										housetxt.setVisible(true);
+										streettxt.setVisible(true);
+									}
+
+									saveUpdate.addActionListener(new ActionListener() {
+										public void actionPerformed(ActionEvent e) {
+											if (!nametxt.getText().equals("")) {
+												matchingStudents.get(y).setName(nametxt.getText());
+											}
+											if (!agetxt.getText().equals("")) {
+												matchingStudents.get(y).setAge(Integer.parseInt(agetxt.getText()));
+											}
+
+											if (!gstxt.getText().equals("")) {
+												((Student) matchingStudents.get(y))
+														.setGrade(Integer.parseInt(gstxt.getText()));
+											}
+
+											if (!citytxt.getText().equals("")) {
+												matchingStudents.get(y).address.setCity(citytxt.getText());
+											}
+											if (!housetxt.getText().equals("")) {
+												matchingStudents.get(y).address.setHouseNumber(housetxt.getText());
+											}
+											if (!streettxt.getText().equals("")) {
+												matchingStudents.get(y).address.setStreetName(streettxt.getText());
+											}
+											System.out.println(matchingStudents.get(y));
+										}
+
+									});
+
+								}
+
+							});
+
+						}
+
+					});
+				}
 			}
 
 		});
@@ -602,12 +606,12 @@ public class framee1 extends JFrame {
 		JRadioButton unl = new JRadioButton("Both");
 		unl.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-			
+
 				search.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
 						matchingPersons = new ArrayList<Person>();
-					for (Person e1 : persons) {
-						if ((name.getText()).equals(e1.getName()))
+						for (Person e1 : persons) {
+							if ((name.getText()).equals(e1.getName()))
 								matchingPersons.add(e1);
 						}
 						if (e.getSource() == search) {
@@ -618,7 +622,7 @@ public class framee1 extends JFrame {
 							write.setColumns(10);
 							String h = matchingPersons.get(i) + " ";
 							write.setText(h);
-							
+
 							next.setBounds(663, 345, 115, 29);
 							panel_2.add(next);
 							next.addActionListener(new ActionListener() {
@@ -656,8 +660,7 @@ public class framee1 extends JFrame {
 								if (e.getSource() == update2) {
 									if (matchingPersons.get(y) instanceof Student) {
 										label_2.setText("Grade");
-									}
-									else if(matchingPersons.get(y) instanceof Employee) {
+									} else if (matchingPersons.get(y) instanceof Employee) {
 										label_2.setText("Salary");
 									}
 
@@ -670,7 +673,7 @@ public class framee1 extends JFrame {
 									label_5.setVisible(true);
 									saveUpdate.setVisible(true);
 									agetxt.setVisible(true);
-									
+
 									gstxt.setVisible(true);
 									citytxt.setVisible(true);
 									housetxt.setVisible(true);
@@ -842,6 +845,25 @@ public class framee1 extends JFrame {
 		JButton btnExit = new JButton("Exit");
 		btnExit.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
+				org.json.JSONObject countryObj = new org.json.JSONObject();
+				JSONArray listOfStates = new JSONArray();
+				for (Person r : persons) {
+					listOfStates.put(r);
+				}
+				countryObj.put("Person2", listOfStates);
+
+				try {
+					// Writing to a file
+					File file = new File("OrianaFile.txt");
+					file.createNewFile();
+					FileWriter fileWriter = new FileWriter(file);
+					fileWriter.write(countryObj.toString());
+					fileWriter.flush();
+					fileWriter.close();
+
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
 				System.exit(0);
 			}
 		});

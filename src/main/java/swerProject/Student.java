@@ -24,7 +24,7 @@ public class Student extends Person  {
 
 	@Override
 	public String toString() {
-		return "Student \nName: " + name + "\nAge=" + age + "\nGrade:" + grade + address;
+		return "Student"+" \n Name: " + name + "\n Age:" + age + "\n Grade:" + grade + address;
 	}
 
 	public double compare(Object o, double num) {
