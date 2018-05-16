@@ -22,7 +22,7 @@ public class framee1 extends JFrame {
 	ArrayList<Person> persons = new ArrayList<Person>();
 	ArrayList<Student> students = new ArrayList<Student>();
 	ArrayList<Employee> employees = new ArrayList<Employee>();
-	ArrayList<Adminstrator> admin = new ArrayList<Adminstrator>();
+	
 	public static JLabel label_2;
 	public static JLabel label;
 	public static JLabel label_5;
@@ -128,7 +128,7 @@ public class framee1 extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				String username1 = username.getText();
 				String password1 = password.getText();
-				admin.add(new Adminstrator(username1, password1));
+				Adminstrator admin = new Adminstrator(username1,password1); 
 			}
 		});
 		panel_3.add(btnSave);
@@ -295,6 +295,10 @@ public class framee1 extends JFrame {
 		final JPanel panel_2 = new JPanel();
 		tabbedPane.addTab("Search", null, panel_2, null);
 		panel_2.setLayout(null);
+		final JButton search = new JButton("Search");
+		search.setBounds(608, 423, 115, 29);
+		panel_2.add(search);
+		final JButton next = new JButton("Next");
 		final JLabel label_1 = new JLabel("Age");
 		label_1.setBounds(10, 44, 85, 20);
 		panel_2.add(label_1);
@@ -359,17 +363,16 @@ public class framee1 extends JFrame {
 		citytxt.setVisible(false);
 		housetxt.setVisible(false);
 		streettxt.setVisible(false);
-		final JRadioButton employeeCheck = new JRadioButton("employees");
+		final JRadioButton employeeCheck = new JRadioButton("Employees");
 		employeeCheck.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				final JButton search = new JButton("Search");
-				search.setBounds(608, 423, 115, 29);
-				panel_2.add(search);
+		
 				search.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
+		
 						matchingEmployees = new ArrayList<Employee>();
 						for (Employee e1 : employees) {
-							if ((name.getText()).equals(((Employee) e1).getName()))
+							if ((name.getText()).equalsIgnoreCase(((Employee) e1).getName()))
 								matchingEmployees.add(e1);
 						}
 						if (e.getSource() == search) {
@@ -379,8 +382,9 @@ public class framee1 extends JFrame {
 							contentPane.add(write);
 							write.setColumns(10);
 							String h = matchingEmployees.get(i) + " ";
-							write.setText(h);
-							final JButton next = new JButton("next");
+							System.out.println(h);
+						write.setText(h);
+							
 							next.setBounds(663, 345, 115, 29);
 							panel_2.add(next);
 							next.addActionListener(new ActionListener() {
@@ -394,7 +398,7 @@ public class framee1 extends JFrame {
 										} catch (Exception e5) {
 											defaultframe t = new defaultframe();
 											JLabel labelerror = new JLabel(
-													"There is no other matching users for this name.");
+													"There are no other matching users for this name.");
 											labelerror.setBounds(15, 221, 520, 73);
 											t.getContentPane().add(labelerror);
 											t.setVisible(true);
@@ -402,7 +406,7 @@ public class framee1 extends JFrame {
 									}
 
 								}
-
+							
 							});
 						}
 
@@ -469,25 +473,27 @@ public class framee1 extends JFrame {
 					}
 
 				});
-			}
+	
+		}
+		
 
 		});
+		
 		employeeCheck.setBounds(10, 430, 155, 29);
 		panel_2.add(employeeCheck);
 
-		JRadioButton student = new JRadioButton("student");
+		final JRadioButton student = new JRadioButton("student");
 		student.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				final JButton search = new JButton("Search");
-				search.setBounds(608, 423, 115, 29);
-				panel_2.add(search);
+			if(e.getSource() == student) {
 				search.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
 						matchingStudents = new ArrayList<Student>();
 						for (Student e1 : students) {
-							if ((name.getText()).equals(((Student) e1).getName()))
+							if ((name.getText()).equalsIgnoreCase(((Student) e1).getName()))
 								matchingStudents.add(e1);
 						}
+			
 						if (e.getSource() == search) {
 							y = i;
 							write = new JTextArea();
@@ -496,7 +502,7 @@ public class framee1 extends JFrame {
 							write.setColumns(10);
 							String h = matchingStudents.get(i) + " ";
 							write.setText(h);
-							final JButton next = new JButton("next");
+							
 							next.setBounds(663, 345, 115, 29);
 							panel_2.add(next);
 							next.addActionListener(new ActionListener() {
@@ -518,7 +524,7 @@ public class framee1 extends JFrame {
 									}
 
 								}
-
+							
 							});
 						}
 
@@ -586,18 +592,17 @@ public class framee1 extends JFrame {
 
 				});
 			}
+			}
 
 		});
 
 		student.setBounds(11, 467, 155, 29);
 		panel_2.add(student);
 
-		JRadioButton unl = new JRadioButton("keep it unlimited");
+		JRadioButton unl = new JRadioButton("Both");
 		unl.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				final JButton search = new JButton("Search");
-				search.setBounds(608, 423, 115, 29);
-				panel_2.add(search);
+			
 				search.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
 						matchingPersons = new ArrayList<Person>();
@@ -613,7 +618,7 @@ public class framee1 extends JFrame {
 							write.setColumns(10);
 							String h = matchingPersons.get(i) + " ";
 							write.setText(h);
-							final JButton next = new JButton("next");
+							
 							next.setBounds(663, 345, 115, 29);
 							panel_2.add(next);
 							next.addActionListener(new ActionListener() {
@@ -627,7 +632,7 @@ public class framee1 extends JFrame {
 										} catch (Exception e5) {
 											defaultframe t = new defaultframe();
 											JLabel labelerror = new JLabel(
-													"There is no other matching users for this name.");
+													"There are no other matching users for this name.");
 											labelerror.setBounds(15, 221, 520, 73);
 											t.getContentPane().add(labelerror);
 											t.setVisible(true);
@@ -665,6 +670,7 @@ public class framee1 extends JFrame {
 									label_5.setVisible(true);
 									saveUpdate.setVisible(true);
 									agetxt.setVisible(true);
+									
 									gstxt.setVisible(true);
 									citytxt.setVisible(true);
 									housetxt.setVisible(true);
