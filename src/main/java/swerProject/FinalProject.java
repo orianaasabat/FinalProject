@@ -57,7 +57,7 @@ public class FinalProject extends JFrame {
 		contentPane.setBorder(new LineBorder(new Color(0, 0, 0)));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
-
+		getContentPane().setBackground(Color.CYAN);
 		username = new JTextField();
 		username.setBounds(388, 175, 146, 26);
 		contentPane.add(username);
@@ -116,7 +116,7 @@ public class FinalProject extends JFrame {
 		contentPane.add(lblToTheProgram);
 
 		JLabel lblNewLabel = new JLabel("");
-		lblNewLabel.setIcon(new ImageIcon(FinalProject.class.getResource("/swerProject/download.jpg")));
+		//lblNewLabel.setIcon(new ImageIcon(FinalProject.class.getResource("/swerProject/download.jpg")));
 		lblNewLabel.setBounds(27, 34, 210, 189);
 		contentPane.add(lblNewLabel);
 
