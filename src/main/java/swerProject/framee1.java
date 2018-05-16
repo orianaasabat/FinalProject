@@ -111,25 +111,25 @@ public class framee1 extends JFrame {
 		panel_3.setLayout(null);
 
 		username = new JTextField();
-		username.setBounds(151, 16, 146, 26);
+		username.setBounds(267, 58, 146, 26);
 		panel_3.add(username);
 		username.setColumns(10);
 
 		JLabel lblUserName = new JLabel("Username");
-		lblUserName.setBounds(23, 19, 131, 20);
+		lblUserName.setBounds(307, 27, 131, 20);
 		panel_3.add(lblUserName);
 
 		JLabel lblPassword = new JLabel("Password");
-		lblPassword.setBounds(23, 61, 102, 20);
+		lblPassword.setBounds(311, 114, 102, 20);
 		panel_3.add(lblPassword);
 
 		password = new JTextField();
-		password.setBounds(151, 58, 146, 26);
+		password.setBounds(267, 145, 146, 26);
 		panel_3.add(password);
 		password.setColumns(10);
 
 		JButton btnSave = new JButton("Add an Adminstrator");
-		btnSave.setBounds(289, 212, 115, 29);
+		btnSave.setBounds(267, 212, 146, 39);
 		btnSave.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				String username1 = username.getText();
@@ -148,7 +148,7 @@ public class framee1 extends JFrame {
 		panel.setLayout(null);
 
 		employeename = new JTextField();
-		employeename.setBounds(0, 16, 146, 26);
+		employeename.setBounds(258, 19, 146, 26);
 		panel.add(employeename);
 		employeename.setColumns(10);
 
@@ -161,12 +161,12 @@ public class framee1 extends JFrame {
 		panel.add(lblAge_1);
 
 		employeeage = new JTextField();
-		employeeage.setBounds(0, 58, 146, 26);
+		employeeage.setBounds(258, 56, 146, 26);
 		panel.add(employeeage);
 		employeeage.setColumns(10);
 
 		employeesalary = new JTextField();
-		employeesalary.setBounds(0, 100, 146, 26);
+		employeesalary.setBounds(258, 100, 146, 26);
 		panel.add(employeesalary);
 		employeesalary.setColumns(10);
 
@@ -175,7 +175,7 @@ public class framee1 extends JFrame {
 		panel.add(lblSalary);
 
 		employeecity = new JTextField();
-		employeecity.setBounds(0, 140, 146, 26);
+		employeecity.setBounds(260, 140, 146, 26);
 		panel.add(employeecity);
 		employeecity.setColumns(10);
 
@@ -188,12 +188,12 @@ public class framee1 extends JFrame {
 		panel.add(lblHouseNumber);
 
 		employeehouse = new JTextField();
-		employeehouse.setBounds(0, 185, 146, 26);
+		employeehouse.setBounds(260, 185, 146, 26);
 		panel.add(employeehouse);
 		employeehouse.setColumns(10);
 
 		employeestreet = new JTextField();
-		employeestreet.setBounds(0, 235, 146, 26);
+		employeestreet.setBounds(258, 235, 146, 26);
 		panel.add(employeestreet);
 		employeestreet.setColumns(10);
 
@@ -202,7 +202,7 @@ public class framee1 extends JFrame {
 		panel.add(lblNewLabel_2);
 
 		JButton btnSave_2 = new JButton("Add Employee");
-		btnSave_2.setBounds(344, 232, 115, 29);
+		btnSave_2.setBounds(275, 309, 115, 29);
 		panel.add(btnSave_2);
 		btnSave_2.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -230,7 +230,7 @@ public class framee1 extends JFrame {
 		panel_1.add(studentname);
 
 		studentName = new JTextField();
-		studentName.setBounds(15, 16, 146, 26);
+		studentName.setBounds(287, 16, 146, 26);
 		panel_1.add(studentName);
 		studentName.setColumns(10);
 
@@ -239,12 +239,12 @@ public class framee1 extends JFrame {
 		panel_1.add(studentAge);
 
 		studentage = new JTextField();
-		studentage.setBounds(15, 52, 146, 26);
+		studentage.setBounds(287, 52, 146, 26);
 		panel_1.add(studentage);
 		studentage.setColumns(10);
 
 		studentgrade = new JTextField();
-		studentgrade.setBounds(15, 94, 146, 26);
+		studentgrade.setBounds(287, 88, 146, 26);
 		panel_1.add(studentgrade);
 		studentgrade.setColumns(10);
 
@@ -253,29 +253,29 @@ public class framee1 extends JFrame {
 		panel_1.add(studentGrade);
 
 		studentcity = new JTextField();
-		studentcity.setBounds(15, 136, 146, 26);
+		studentcity.setBounds(287, 125, 146, 26);
 		panel_1.add(studentcity);
 		studentcity.setColumns(10);
 
 		JLabel studentStreet = new JLabel("Street Name");
-		studentStreet.setBounds(216, 225, 107, 20);
+		studentStreet.setBounds(216, 199, 107, 20);
 		panel_1.add(studentStreet);
 
 		studenthouse = new JTextField();
-		studenthouse.setBounds(15, 178, 146, 26);
+		studenthouse.setBounds(287, 162, 146, 26);
 		panel_1.add(studenthouse);
 		studenthouse.setColumns(10);
 
 		JLabel studentHouseNumber = new JLabel("House Number");
-		studentHouseNumber.setBounds(216, 181, 107, 20);
+		studentHouseNumber.setBounds(216, 162, 107, 20);
 		panel_1.add(studentHouseNumber);
 
 		final JLabel studentCity = new JLabel("city");
-		studentCity.setBounds(216, 142, 69, 20);
+		studentCity.setBounds(216, 128, 69, 20);
 		panel_1.add(studentCity);
 
 		studentstreet = new JTextField();
-		studentstreet.setBounds(15, 222, 146, 26);
+		studentstreet.setBounds(287, 195, 146, 26);
 		panel_1.add(studentstreet);
 		studentstreet.setColumns(10);
 
@@ -294,75 +294,75 @@ public class framee1 extends JFrame {
 				students.add(new Student(name, age, f, grade));
 			}
 		});
-		btnSave_1.setBounds(359, 232, 115, 29);
+		btnSave_1.setBounds(287, 269, 115, 29);
 		panel_1.add(btnSave_1);
-
-		final JPanel panel_2 = new JPanel();
-		tabbedPane.addTab("Search", null, panel_2, null);
-		panel_2.setLayout(null);
-		final JButton search = new JButton("Search");
-		search.setBounds(608, 423, 115, 29);
-		panel_2.add(search);
 		final JButton next = new JButton("Next");
-		final JLabel label_1 = new JLabel("Age");
-		label_1.setBounds(10, 44, 85, 20);
-		panel_2.add(label_1);
-		final JLabel label = new JLabel("Name");
-		label.setBounds(11, 11, 41, 20);
-		panel_2.add(label);
+
+		final JPanel panel_2_1 = new JPanel();
+		tabbedPane.addTab("Search", null, panel_2_1, null);
+		panel_2_1.setLayout(null);
+		final JButton search = new JButton("Search");
+		search.setBounds(222, 43, 115, 29);
+		panel_2_1.add(search);
+		final JLabel label_1_1 = new JLabel("Age");
+		label_1_1.setBounds(492, 63, 85, 20);
+		panel_2_1.add(label_1_1);
+		final JLabel label_6 = new JLabel("Name");
+		label_6.setBounds(492, 11, 41, 20);
+		panel_2_1.add(label_6);
 
 		nametxt = new JTextField();
-		nametxt.setBounds(71, 8, 146, 26);
-		panel_2.add(nametxt);
+		nametxt.setBounds(445, 30, 146, 26);
+		panel_2_1.add(nametxt);
 		nametxt.setColumns(10);
 		agetxt = new JTextField();
-		agetxt.setBounds(71, 45, 146, 26);
-		panel_2.add(agetxt);
+		agetxt.setBounds(445, 82, 146, 26);
+		panel_2_1.add(agetxt);
 		agetxt.setColumns(10);
 
 		gstxt = new JTextField();
-		gstxt.setBounds(71, 79, 146, 26);
-		panel_2.add(gstxt);
+		gstxt.setBounds(445, 132, 146, 26);
+		panel_2_1.add(gstxt);
 		gstxt.setColumns(10);
 
-		final JLabel label_2 = new JLabel("Grade");
-		label_2.setBounds(11, 82, 69, 20);
-		panel_2.add(label_2);
+		final JLabel label_2_1 = new JLabel("Grade");
+		label_2_1.setBounds(492, 113, 69, 20);
+		panel_2_1.add(label_2_1);
 
 		citytxt = new JTextField();
-		citytxt.setBounds(71, 119, 146, 26);
-		panel_2.add(citytxt);
+		citytxt.setBounds(445, 185, 146, 26);
+		panel_2_1.add(citytxt);
 		citytxt.setColumns(10);
 
-		final JLabel label_5 = new JLabel("city");
-		label_5.setBounds(11, 119, 69, 20);
-		panel_2.add(label_5);
+		final JLabel label_5_1 = new JLabel("city");
+		label_5_1.setBounds(492, 158, 69, 20);
+		panel_2_1.add(label_5_1);
 
 		housetxt = new JTextField();
-		housetxt.setBounds(71, 184, 146, 26);
-		panel_2.add(housetxt);
+		housetxt.setBounds(445, 282, 146, 26);
+		panel_2_1.add(housetxt);
 		housetxt.setColumns(10);
 
-		final JLabel label_4 = new JLabel("House Number");
-		label_4.setBounds(0, 187, 107, 20);
-		panel_2.add(label_4);
+		final JLabel label_4_1 = new JLabel("House Number");
+		label_4_1.setBounds(476, 258, 85, 20);
+		panel_2_1.add(label_4_1);
 
-		final JLabel label_3 = new JLabel("Street Name");
-		label_3.setBounds(0, 156, 107, 20);
-		panel_2.add(label_3);
+		final JLabel label_3_1 = new JLabel("Street Name");
+		label_3_1.setBounds(476, 211, 107, 20);
+		panel_2_1.add(label_3_1);
 
 		streettxt = new JTextField();
-		streettxt.setBounds(71, 156, 146, 26);
-		panel_2.add(streettxt);
+		streettxt.setBounds(445, 234, 146, 26);
+		panel_2_1.add(streettxt);
 		streettxt.setColumns(10);
 
-		label.setVisible(false);
+		label_6.setVisible(false);
 		nametxt.setVisible(false);
-		label_1.setVisible(false);
-		label_2.setVisible(false);
-		label_3.setVisible(false);
-		label_4.setVisible(false);
-		label_5.setVisible(false);
+		label_1_1.setVisible(false);
+		label_2_1.setVisible(false);
+		label_3_1.setVisible(false);
+		label_4_1.setVisible(false);
+		label_5_1.setVisible(false);
 		agetxt.setVisible(false);
 		gstxt.setVisible(false);
 		citytxt.setVisible(false);
@@ -383,15 +383,15 @@ public class framee1 extends JFrame {
 						if (e.getSource() == search) {
 							y = i;
 							write = new JTextArea();
-							write.setBounds(475, 178, 227, 216);
+							write.setBounds(33, 116, 244, 157);
 							contentPane.add(write);
 							write.setColumns(10);
 							String h = matchingEmployees.get(i) + " ";
 							System.out.println(h);
 							write.setText(h);
 
-							next.setBounds(663, 345, 115, 29);
-							panel_2.add(next);
+							next.setBounds(215, 366, 91, 23);
+							panel_2_1.add(next);
 							next.addActionListener(new ActionListener() {
 								public void actionPerformed(ActionEvent e) {
 									if (e.getSource() == next) {
@@ -416,25 +416,25 @@ public class framee1 extends JFrame {
 						}
 
 						final JButton update2 = new JButton("Update information");
-						update2.setBounds(390, 360, 183, 23);
-						panel_2.add(update2);
+						update2.setBounds(41, 366, 183, 23);
+						panel_2_1.add(update2);
 
 						update2.addActionListener(new ActionListener() {
 							public void actionPerformed(ActionEvent e) {
 								final JButton saveUpdate = new JButton("Save The Update");
-								saveUpdate.setBounds(81, 225, 127, 26);
-								panel_2.add(saveUpdate);
+								saveUpdate.setBounds(445, 336, 156, 29);
+								panel_2_1.add(saveUpdate);
 								if (e.getSource() == update2) {
 
-									label_2.setText("Salary");
+									label_2_1.setText("Salary");
 
-									label.setVisible(true);
+									label_6.setVisible(true);
 									nametxt.setVisible(true);
-									label_1.setVisible(true);
-									label_2.setVisible(true);
-									label_3.setVisible(true);
-									label_4.setVisible(true);
-									label_5.setVisible(true);
+									label_1_1.setVisible(true);
+									label_2_1.setVisible(true);
+									label_3_1.setVisible(true);
+									label_4_1.setVisible(true);
+									label_5_1.setVisible(true);
 									saveUpdate.setVisible(true);
 									agetxt.setVisible(true);
 									gstxt.setVisible(true);
@@ -483,8 +483,8 @@ public class framee1 extends JFrame {
 
 		});
 
-		employeeCheck.setBounds(10, 430, 155, 29);
-		panel_2.add(employeeCheck);
+		employeeCheck.setBounds(10, 7, 85, 29);
+		panel_2_1.add(employeeCheck);
 
 		final JRadioButton student = new JRadioButton("student");
 		student.addActionListener(new ActionListener() {
@@ -501,14 +501,14 @@ public class framee1 extends JFrame {
 							if (e.getSource() == search) {
 								y = i;
 								write = new JTextArea();
-								write.setBounds(475, 178, 227, 216);
+								write.setBounds(33, 116, 244, 157);
 								contentPane.add(write);
 								write.setColumns(10);
 								String h = matchingStudents.get(i) + " ";
 								write.setText(h);
 
-								next.setBounds(663, 345, 115, 29);
-								panel_2.add(next);
+								next.setBounds(215, 366,91, 23);
+								panel_2_1.add(next);
 								next.addActionListener(new ActionListener() {
 									public void actionPerformed(ActionEvent e) {
 										if (e.getSource() == next) {
@@ -533,25 +533,25 @@ public class framee1 extends JFrame {
 							}
 
 							final JButton update2 = new JButton("Update information");
-							update2.setBounds(390, 360, 183, 23);
-							panel_2.add(update2);
+							update2.setBounds(41, 366, 91, 23);
+							panel_2_1.add(update2);
 
 							update2.addActionListener(new ActionListener() {
 								public void actionPerformed(ActionEvent e) {
 									final JButton saveUpdate = new JButton("Save The Update");
-									saveUpdate.setBounds(81, 225, 127, 26);
-									panel_2.add(saveUpdate);
+									saveUpdate.setBounds(445, 336, 156, 29);
+									panel_2_1.add(saveUpdate);
 									if (e.getSource() == update2) {
 
-										label_2.setText("Grade");
+										label_2_1.setText("Grade");
 
-										label.setVisible(true);
+										label_6.setVisible(true);
 										nametxt.setVisible(true);
-										label_1.setVisible(true);
-										label_2.setVisible(true);
-										label_3.setVisible(true);
-										label_4.setVisible(true);
-										label_5.setVisible(true);
+										label_1_1.setVisible(true);
+										label_2_1.setVisible(true);
+										label_3_1.setVisible(true);
+										label_4_1.setVisible(true);
+										label_5_1.setVisible(true);
 										saveUpdate.setVisible(true);
 										agetxt.setVisible(true);
 										gstxt.setVisible(true);
@@ -600,8 +600,8 @@ public class framee1 extends JFrame {
 
 		});
 
-		student.setBounds(11, 467, 155, 29);
-		panel_2.add(student);
+		student.setBounds(97, 7, 69, 29);
+		panel_2_1.add(student);
 
 		JRadioButton unl = new JRadioButton("Both");
 		unl.addActionListener(new ActionListener() {
@@ -617,14 +617,14 @@ public class framee1 extends JFrame {
 						if (e.getSource() == search) {
 							y = i;
 							write = new JTextArea();
-							write.setBounds(475, 178, 227, 216);
+							write.setBounds(33, 116, 244, 157);
 							contentPane.add(write);
 							write.setColumns(10);
 							String h = matchingPersons.get(i) + " ";
 							write.setText(h);
 
-							next.setBounds(663, 345, 115, 29);
-							panel_2.add(next);
+							next.setBounds(215, 366, 91, 23);
+							panel_2_1.add(next);
 							next.addActionListener(new ActionListener() {
 								public void actionPerformed(ActionEvent e) {
 									if (e.getSource() == next) {
@@ -649,28 +649,28 @@ public class framee1 extends JFrame {
 						}
 
 						final JButton update2 = new JButton("Update information");
-						update2.setBounds(390, 360, 183, 23);
-						panel_2.add(update2);
+						update2.setBounds(41, 366, 91, 23);
+						panel_2_1.add(update2);
 
 						update2.addActionListener(new ActionListener() {
 							public void actionPerformed(ActionEvent e) {
 								final JButton saveUpdate = new JButton("Save The Update");
-								saveUpdate.setBounds(81, 225, 127, 26);
-								panel_2.add(saveUpdate);
+								saveUpdate.setBounds(445, 336, 156, 29);
+								panel_2_1.add(saveUpdate);
 								if (e.getSource() == update2) {
 									if (matchingPersons.get(y) instanceof Student) {
-										label_2.setText("Grade");
+										label_2_1.setText("Grade");
 									} else if (matchingPersons.get(y) instanceof Employee) {
-										label_2.setText("Salary");
+										label_2_1.setText("Salary");
 									}
 
-									label.setVisible(true);
+									label_6.setVisible(true);
 									nametxt.setVisible(true);
-									label_1.setVisible(true);
-									label_2.setVisible(true);
-									label_3.setVisible(true);
-									label_4.setVisible(true);
-									label_5.setVisible(true);
+									label_1_1.setVisible(true);
+									label_2_1.setVisible(true);
+									label_3_1.setVisible(true);
+									label_4_1.setVisible(true);
+									label_5_1.setVisible(true);
 									saveUpdate.setVisible(true);
 									agetxt.setVisible(true);
 
@@ -723,15 +723,15 @@ public class framee1 extends JFrame {
 
 		});
 
-		unl.setBounds(10, 498, 155, 29);
-		panel_2.add(unl);
+		unl.setBounds(168, 7, 58, 29);
+		panel_2_1.add(unl);
 		JLabel lblName_1 = new JLabel("Name");
-		lblName_1.setBounds(327, 28, 69, 20);
-		panel_2.add(lblName_1);
+		lblName_1.setBounds(10, 48, 69, 20);
+		panel_2_1.add(lblName_1);
 
 		name = new JTextField();
-		name.setBounds(445, 25, 146, 26);
-		panel_2.add(name);
+		name.setBounds(51, 47, 146, 26);
+		panel_2_1.add(name);
 		name.setColumns(10);
 		final JPanel panel_4 = new JPanel();
 		tabbedPane.addTab("Report", null, panel_4, null);
