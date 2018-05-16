@@ -76,6 +76,15 @@ public class framee1 extends JFrame {
 	 * Launch the application.
 	 */
 	public static void main(String[] args) {
+		JSONParser parser = new JSONParser();
+	     try {
+	    	 Object obj = parser.parse(new FileReader("oriana.json"));
+	     }
+	     catch(Exception e ) {
+	    	 e.printStackTrace();
+	     }
+
+
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
@@ -854,7 +863,7 @@ public class framee1 extends JFrame {
 
 				try {
 					// Writing to a file
-					File file = new File("OrianaFile.txt");
+					File file = new File("OrianaFile.Json");
 					file.createNewFile();
 					FileWriter fileWriter = new FileWriter(file);
 					fileWriter.write(countryObj.toString());
