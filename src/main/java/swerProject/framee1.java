@@ -3,6 +3,7 @@ package swerProject;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.Component;
 import java.awt.EventQueue;
 import java.awt.List;
 import java.awt.Window;
@@ -11,16 +12,23 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
 import org.json.JSONArray;
-
+import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.SerializationFeature;
 import javax.swing.JTabbedPane;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
+import java.awt.print.PrinterException;
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.io.PrintStream;
 import java.util.ArrayList;
-import java.util.Vector;
+import java.util.Scanner;
 import java.awt.event.ActionEvent;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -28,8 +36,8 @@ import javax.swing.JTextField;
 import javax.swing.JRadioButton;
 import javax.swing.JTextArea;
 import javax.swing.JCheckBox;
-import javax.swing.JTable;
-import javax.swing.JList;
+import javax.swing.JScrollPane;
+import javax.swing.JScrollBar;
 
 public class framee1 extends JFrame {
 	ArrayList<Person> persons = new ArrayList<Person>();
@@ -78,7 +86,6 @@ public class framee1 extends JFrame {
 	private JTextField citytxt;
 	private JTextField housetxt;
 	private JTextField streettxt;
-	private JTable reportTable;
 
 	/**
 	 * Launch the application.
@@ -88,6 +95,7 @@ public class framee1 extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
+					ObjectMapper m = new ObjectMapper();
 					framee1 frame = new framee1();
 					frame.setVisible(true);
 
@@ -159,61 +167,61 @@ public class framee1 extends JFrame {
 		panel.setLayout(null);
 
 		employeename = new JTextField();
-		employeename.setBounds(258, 19, 146, 26);
+		employeename.setBounds(245, 19, 146, 26);
 		panel.add(employeename);
 		employeename.setColumns(10);
 
 		JLabel lblName = new JLabel("Name");
-		lblName.setBounds(179, 22, 69, 20);
+		lblName.setBounds(292, 0, 69, 20);
 		panel.add(lblName);
 
 		JLabel lblAge_1 = new JLabel("Age");
-		lblAge_1.setBounds(179, 58, 69, 20);
+		lblAge_1.setBounds(292, 42, 69, 20);
 		panel.add(lblAge_1);
 		panel.setBackground(Color.CYAN);
 		employeeage = new JTextField();
-		employeeage.setBounds(258, 56, 146, 26);
+		employeeage.setBounds(245, 63, 146, 26);
 		panel.add(employeeage);
 		employeeage.setColumns(10);
 
 		employeesalary = new JTextField();
-		employeesalary.setBounds(258, 100, 146, 26);
+		employeesalary.setBounds(245, 106, 146, 26);
 		panel.add(employeesalary);
 		employeesalary.setColumns(10);
 
 		JLabel lblSalary = new JLabel("Salary");
-		lblSalary.setBounds(179, 103, 69, 20);
+		lblSalary.setBounds(292, 86, 69, 20);
 		panel.add(lblSalary);
 
 		employeecity = new JTextField();
-		employeecity.setBounds(260, 140, 146, 26);
+		employeecity.setBounds(245, 151, 146, 26);
 		panel.add(employeecity);
 		employeecity.setColumns(10);
 
 		JLabel lblCity_1 = new JLabel("City");
-		lblCity_1.setBounds(179, 143, 69, 20);
+		lblCity_1.setBounds(292, 132, 69, 20);
 		panel.add(lblCity_1);
 
 		JLabel lblHouseNumber = new JLabel("House Number");
-		lblHouseNumber.setBounds(179, 188, 120, 20);
+		lblHouseNumber.setBounds(281, 176, 120, 20);
 		panel.add(lblHouseNumber);
 
 		employeehouse = new JTextField();
-		employeehouse.setBounds(260, 185, 146, 26);
+		employeehouse.setBounds(245, 198, 146, 26);
 		panel.add(employeehouse);
 		employeehouse.setColumns(10);
 
 		employeestreet = new JTextField();
-		employeestreet.setBounds(258, 235, 146, 26);
+		employeestreet.setBounds(245, 246, 146, 26);
 		panel.add(employeestreet);
 		employeestreet.setColumns(10);
 
 		JLabel lblNewLabel_2 = new JLabel("Street Name");
-		lblNewLabel_2.setBounds(179, 238, 120, 20);
+		lblNewLabel_2.setBounds(281, 223, 120, 20);
 		panel.add(lblNewLabel_2);
 
 		JButton btnSave_2 = new JButton("Add Employee");
-		btnSave_2.setBounds(275, 309, 115, 29);
+		btnSave_2.setBounds(262, 307, 115, 29);
 		panel.add(btnSave_2);
 		btnSave_2.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -237,7 +245,7 @@ public class framee1 extends JFrame {
 		panel_1.setLayout(null);
 		panel_1.setBackground(Color.CYAN);
 		JLabel studentname = new JLabel("Name");
-		studentname.setBounds(216, 19, 41, 20);
+		studentname.setBounds(333, 0, 41, 20);
 		panel_1.add(studentname);
 
 		studentName = new JTextField();
@@ -246,47 +254,47 @@ public class framee1 extends JFrame {
 		studentName.setColumns(10);
 
 		final JLabel studentAge = new JLabel("Age");
-		studentAge.setBounds(216, 55, 85, 20);
+		studentAge.setBounds(333, 42, 85, 20);
 		panel_1.add(studentAge);
 
 		studentage = new JTextField();
-		studentage.setBounds(287, 52, 146, 26);
+		studentage.setBounds(287, 63, 146, 26);
 		panel_1.add(studentage);
 		studentage.setColumns(10);
 
 		studentgrade = new JTextField();
-		studentgrade.setBounds(287, 88, 146, 26);
+		studentgrade.setBounds(287, 114, 146, 26);
 		panel_1.add(studentgrade);
 		studentgrade.setColumns(10);
 
 		JLabel studentGrade = new JLabel("Grade");
-		studentGrade.setBounds(216, 91, 69, 20);
+		studentGrade.setBounds(333, 93, 69, 20);
 		panel_1.add(studentGrade);
 
 		studentcity = new JTextField();
-		studentcity.setBounds(287, 125, 146, 26);
+		studentcity.setBounds(287, 159, 146, 26);
 		panel_1.add(studentcity);
 		studentcity.setColumns(10);
 
 		JLabel studentStreet = new JLabel("Street Name");
-		studentStreet.setBounds(216, 199, 107, 20);
+		studentStreet.setBounds(326, 235, 107, 20);
 		panel_1.add(studentStreet);
 
 		studenthouse = new JTextField();
-		studenthouse.setBounds(287, 162, 146, 26);
+		studenthouse.setBounds(287, 204, 146, 26);
 		panel_1.add(studenthouse);
 		studenthouse.setColumns(10);
 
 		JLabel studentHouseNumber = new JLabel("House Number");
-		studentHouseNumber.setBounds(216, 162, 107, 20);
+		studentHouseNumber.setBounds(326, 184, 107, 20);
 		panel_1.add(studentHouseNumber);
 
-		final JLabel studentCity = new JLabel("city");
-		studentCity.setBounds(216, 128, 69, 20);
+		final JLabel studentCity = new JLabel("City");
+		studentCity.setBounds(333, 139, 69, 20);
 		panel_1.add(studentCity);
 
 		studentstreet = new JTextField();
-		studentstreet.setBounds(287, 195, 146, 26);
+		studentstreet.setBounds(287, 255, 146, 26);
 		panel_1.add(studentstreet);
 		studentstreet.setColumns(10);
 
@@ -305,7 +313,7 @@ public class framee1 extends JFrame {
 				students.add(new Student(name, age, f, grade));
 			}
 		});
-		btnSave_1.setBounds(287, 269, 115, 29);
+		btnSave_1.setBounds(301, 303, 115, 29);
 		panel_1.add(btnSave_1);
 		final JButton next = new JButton("Next");
 
@@ -338,7 +346,7 @@ public class framee1 extends JFrame {
 		gstxt.setColumns(10);
 
 		final JLabel label_2_1 = new JLabel("Grade");
-		label_2_1.setBounds(492, 113, 69, 20);
+		label_2_1.setBounds(492, 111, 69, 20);
 		panel_2_1.add(label_2_1);
 
 		citytxt = new JTextField();
@@ -346,9 +354,9 @@ public class framee1 extends JFrame {
 		panel_2_1.add(citytxt);
 		citytxt.setColumns(10);
 
-		final JLabel label_5_1 = new JLabel("city");
-		label_5_1.setBounds(492, 158, 69, 20);
-		panel_2_1.add(label_5_1);
+		final JLabel lblCity = new JLabel("City");
+		lblCity.setBounds(492, 164, 69, 20);
+		panel_2_1.add(lblCity);
 
 		housetxt = new JTextField();
 		housetxt.setBounds(445, 282, 146, 26);
@@ -374,13 +382,14 @@ public class framee1 extends JFrame {
 		label_2_1.setVisible(false);
 		label_3_1.setVisible(false);
 		label_4_1.setVisible(false);
-		label_5_1.setVisible(false);
+		lblCity.setVisible(false);
 		agetxt.setVisible(false);
 		gstxt.setVisible(false);
 		citytxt.setVisible(false);
 		housetxt.setVisible(false);
 		streettxt.setVisible(false);
 		final JRadioButton employeeCheck = new JRadioButton("Employees");
+		employeeCheck.setBackground(Color.white);
 		employeeCheck.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 
@@ -445,7 +454,7 @@ public class framee1 extends JFrame {
 									label_2_1.setVisible(true);
 									label_3_1.setVisible(true);
 									label_4_1.setVisible(true);
-									label_5_1.setVisible(true);
+									lblCity.setVisible(true);
 									saveUpdate.setVisible(true);
 									agetxt.setVisible(true);
 									gstxt.setVisible(true);
@@ -497,7 +506,8 @@ public class framee1 extends JFrame {
 		employeeCheck.setBounds(10, 7, 92, 29);
 		panel_2_1.add(employeeCheck);
 
-		final JRadioButton student = new JRadioButton("student");
+		final JRadioButton student = new JRadioButton("Students");
+		student.setBackground(Color.WHITE);
 		student.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				if (e.getSource() == student) {
@@ -562,7 +572,7 @@ public class framee1 extends JFrame {
 										label_2_1.setVisible(true);
 										label_3_1.setVisible(true);
 										label_4_1.setVisible(true);
-										label_5_1.setVisible(true);
+										lblCity.setVisible(true);
 										saveUpdate.setVisible(true);
 										agetxt.setVisible(true);
 										gstxt.setVisible(true);
@@ -611,10 +621,11 @@ public class framee1 extends JFrame {
 
 		});
 
-		student.setBounds(104, 7, 69, 29);
+		student.setBounds(104, 7, 85, 29);
 		panel_2_1.add(student);
 
 		JRadioButton unl = new JRadioButton("Both");
+		unl.setBackground(Color.white);
 		unl.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 
@@ -682,7 +693,7 @@ public class framee1 extends JFrame {
 									label_2_1.setVisible(true);
 									label_3_1.setVisible(true);
 									label_4_1.setVisible(true);
-									label_5_1.setVisible(true);
+									lblCity.setVisible(true);
 									saveUpdate.setVisible(true);
 									agetxt.setVisible(true);
 
@@ -735,7 +746,7 @@ public class framee1 extends JFrame {
 
 		});
 
-		unl.setBounds(175, 7, 58, 29);
+		unl.setBounds(191, 7, 58, 29);
 		panel_2_1.add(unl);
 		JLabel lblName_1 = new JLabel("Name");
 		lblName_1.setBounds(10, 48, 69, 20);
@@ -754,49 +765,66 @@ public class framee1 extends JFrame {
 		panel_4.add(salarytxt);
 		salarytxt.setColumns(10);
 		final JLabel salary_1 = new JLabel("");
-		salary_1.setBounds(43, 67, 69, 20);
+		salary_1.setBounds(52, 67, 69, 20);
 		panel_4.add(salary_1);
 		final JButton reportbtn1 = new JButton("Report");
 		reportbtn1.setBounds(179, 92, 115, 29);
 		panel_4.add(reportbtn1);
-		final JTextField reportedtxt = new JTextField();
-		reportedtxt.setBounds(444, 151, 400, 26);
-		panel_4.add(reportedtxt);
+		final JButton printbtn = new JButton("Print Reports");
+		printbtn.setBounds(64, 396, 146, 35);
+		panel_4.add(printbtn);
 
-		reportedtxt.setColumns(10);
-		reportedtxt.setVisible(false);
+		JScrollPane scrollPane = new JScrollPane();
+		scrollPane.setBounds(28, 143, 242, 225);
+		panel_4.add(scrollPane);
+		final JTextArea textArea = new JTextArea();
+		scrollPane.setViewportView(textArea);
+
 		final JCheckBox employeeReport = new JCheckBox("Report Employees");
-		reportbtn1.addActionListener(new ActionListener() {
+		employeeReport.setBackground(Color.white);
+		employeeReport.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				employeeReport.addActionListener(new ActionListener() {
-					public void actionPerformed(ActionEvent e) {
-						if (e.getSource() == employeeReport) {
-							salary_1.setText("Salary");
-
-							final ArrayList<Employee> reportedEmployee = new ArrayList<Employee>();
+				if (e.getSource() == employeeReport) {
+					salary_1.setText("Salary");
+					reportbtn1.addActionListener(new ActionListener() {
+						public void actionPerformed(ActionEvent e) {
+							final ArrayList<String> reportedEmployee = new ArrayList<String>();
 							int report = Integer.parseInt(salarytxt.getText());
 							if (employees.size() != 0) {
-								for (Employee h : employees) {
-									if (h.getSalary() > report) {
-										reportedEmployee.add(h);
+								for (int z = 0; z < employees.size(); z++) {
+									if (employees.get(z).getSalary() > report) {
+										reportedEmployee.add(" " + (z + 1) + ") Name: " + employees.get(z).getName()
+												+ " ,Salary: " + employees.get(z).getSalary());
 									} // if
 								} // for
-								for (final Employee o : reportedEmployee) {
-									if (e.getSource() == reportbtn1) {
-										reportedtxt.setVisible(true);
-										reportedtxt.setEditable(false);
-										reportedtxt.setText("Name: " + reportedEmployee.get(w).getName() + " , Salary "
-												+ reportedEmployee.get(w).getSalary());
-										reportbtn1.setEnabled(false);
-										w++;
 
-									}
-									if (w == reportedEmployee.size()) {
-										reportbtn1.setEnabled(false);
+								try {
 
-										return;
+									PrintStream file = new PrintStream(new File("report.txt"));
+									for (String s : reportedEmployee) {
+										file.println(s);
 									}
-									reportbtn1.setEnabled(true);
+
+								} catch (IOException n) {
+									System.out.println("couldn't write");
+
+								}
+
+								if (e.getSource() == reportbtn1) {
+
+									try {
+
+										FileReader file = new FileReader("report.txt");
+										BufferedReader bf = new BufferedReader(file);
+										textArea.setEditable(false);
+										textArea.setVisible(true);
+										textArea.read(bf, null);
+										bf.close();
+										textArea.requestFocus();
+
+									} catch (IOException c) {
+										System.out.println("couldn't read");
+									}
 
 								} // for
 							} else {
@@ -804,6 +832,22 @@ public class framee1 extends JFrame {
 										"There are no Employees that have salary higher than " + report);
 							}
 						}
+					});
+				}
+				printbtn.addActionListener(new ActionListener() {
+					public void actionPerformed(ActionEvent e) {
+						if (e.getSource() == printbtn) {
+							try {
+								boolean complete = textArea.print();
+								if (complete) {
+									JOptionPane.showMessageDialog(null, "Printed");
+
+								} else
+									JOptionPane.showMessageDialog(null, "Printing.. ");
+							} catch (PrinterException p) {
+								System.out.println("Couldn't Print");
+							} // catch
+						} // if
 					}
 				});
 
@@ -814,6 +858,7 @@ public class framee1 extends JFrame {
 		panel_4.setBackground(Color.CYAN);
 
 		final JCheckBox studentReport = new JCheckBox("Report Students");
+		studentReport.setBackground(Color.WHITE);
 		studentReport.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				if (e.getSource() == studentReport) {
@@ -821,40 +866,48 @@ public class framee1 extends JFrame {
 					reportbtn1.addActionListener(new ActionListener() {
 						public void actionPerformed(ActionEvent e) {
 							int grade = Integer.parseInt(salarytxt.getText());
-							final ArrayList<Student> reportedstudent = new ArrayList<Student>();
+							final ArrayList<String> reportedstudent = new ArrayList<String>();
 							if (students.size() != 0) {
-								for (Student h : students) {
-									if (h.getGrade() > grade) {
-										reportedstudent.add(h);
+								for (int z = 0; z < students.size(); z++) {
+									if (students.get(z).getGrade() > grade) {
+										reportedstudent.add((z + 1) + ") Name: " + students.get(z).getName()
+												+ " ,Salary: " + students.get(z).getGrade());
 									} // if
 								} // for
 
-								for (final Student o : reportedstudent) {
+								try {
 
-									if (e.getSource() == reportbtn1) {
-										reportedtxt.setEditable(false);
-										reportedtxt.setVisible(true);
-										reportedtxt.setText("Name: " + reportedstudent.get(w).getName() + " , Grade "
-												+ reportedstudent.get(w).getGrade());
-										reportbtn1.setEnabled(false);
-										w++;
-
+									PrintStream file = new PrintStream(new File("report1.txt"));
+									for (String s : reportedstudent) {
+										file.println(s);
 									}
-									if (w == reportedstudent.size()) {
-										reportbtn1.setEnabled(false);
 
-										return;
+								} catch (IOException n) {
+									System.out.println("couldn't write");
+
+								}
+
+								if (e.getSource() == reportbtn1) {
+
+									try {
+
+										FileReader file = new FileReader("report1.txt");
+										BufferedReader bf = new BufferedReader(file);
+										textArea.setEditable(false);
+										textArea.setVisible(true);
+										textArea.read(bf, null);
+										bf.close();
+										textArea.requestFocus();
+
+									} catch (IOException c) {
+										System.out.println("couldn't read");
 									}
-									reportbtn1.setEnabled(true);
 
 								} // for
-
-							} // for
-							else {
+							} else {
 								JOptionPane.showMessageDialog(null,
-										"There are no Students that have grades higher than " + grade);
-							} // else if 1
-
+										"There are no Students that have Grade higher than " + grade);
+							}
 						}
 					});
 				}

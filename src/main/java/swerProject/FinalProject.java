@@ -118,7 +118,7 @@ public class FinalProject extends JFrame {
 		contentPane.add(lblToTheProgram);
 
 		JLabel lblNewLabel = new JLabel("");
-		//lblNewLabel.setIcon(new ImageIcon(FinalProject.class.getResource("/swerProject/download.jpg")));
+		lblNewLabel.setIcon(new ImageIcon("download.jpg"));
 		lblNewLabel.setBounds(27, 34, 210, 189);
 		contentPane.add(lblNewLabel);
 
