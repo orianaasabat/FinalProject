@@ -5,7 +5,10 @@ import java.awt.EventQueue;
 import java.awt.Window.Type;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.File;
+import java.io.FileNotFoundException;
 import java.util.ArrayList;
+import java.util.Scanner;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -29,6 +32,7 @@ public class FinalProject extends JFrame {
 	private JLabel lbl;
 
 	/**
+	 * 
 	 * Launch the application.
 	 */
 	public static void main(String[] args) {
@@ -70,21 +74,33 @@ public class FinalProject extends JFrame {
 		JLabel lblpassword = new JLabel("Password");
 		lblpassword.setBounds(281, 255, 92, 20);
 		contentPane.add(lblpassword);
-
+		Scanner input3;
+		try {
+			Adminstrator r = new Adminstrator();
+			input3 = new Scanner(new File ("AdminFile.txt"));
+		while(input3.hasNext()) {
+			if(input3!=null) {
+			String r1 = input3.next();
+			 r.setAdmin(r1);
+			 
+		}
+		}
+		} catch (Exception e) {
+		e.getMessage();	
+		}
 		JButton btnNext = new JButton("login");
 		btnNext.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				String uname = username.getText();
 				String pass = password.getText();
-
-				Adminstrator admin = new Adminstrator("oriana", "sabat");
-
+			
+               Adminstrator a = new Adminstrator(); 
 				Boolean exist = false;
-				for (String a1 : admin.getAdmin()) {
+				for (String a1 : a.getAdmin()) {
 					if (uname.concat(pass).equals(a1)) {
 						framee1 y = new framee1();
 						y.setVisible(true);
-					exist = true ;
+					    exist = true ;
 					
 					} // if
 				} // for

@@ -5,11 +5,12 @@ import java.util.ArrayList;
 class Adminstrator extends Person {
 	private String userName;
 	private String password;
-	ArrayList<String> admin = new ArrayList<String>();
+	public static ArrayList<String> admin = new ArrayList<String>();
 	
 	public Adminstrator(String userName, String password) {
 		super();
 		this.userName = userName;
+		
 		this.password = password;
 		admin.add(userName.concat(password)); 
 	}
@@ -37,7 +38,8 @@ class Adminstrator extends Person {
 		return admin;
 	}
 
-	public void setAdmin(ArrayList<String> admin) {
-		this.admin = admin;
+	public void setAdmin(String r) {
+		admin.add(r);
 	}
+	
 }
