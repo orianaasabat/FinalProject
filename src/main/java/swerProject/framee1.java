@@ -920,24 +920,32 @@ public class framee1 extends JFrame {
 		JButton btnExit = new JButton("Exit");
 		btnExit.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				org.json.JSONObject countryObj = new org.json.JSONObject();
-				JSONArray listOfStates = new JSONArray();
-				for (Person r : persons) {
-					listOfStates.put(r);
-				}
-				countryObj.put("Person2", listOfStates);
-
+				/*
+				 * org.json.JSONObject countryObj = new org.json.JSONObject(); JSONArray
+				 * listOfStates = new JSONArray(); for (Person r : persons) {
+				 * listOfStates.put(r); } countryObj.put("Person2", listOfStates);
+				 * 
+				 * try { // Writing to a file File file = new File("OrianaFile.Json");
+				 * file.createNewFile(); FileWriter fileWriter = new FileWriter(file);
+				 * fileWriter.write(countryObj.toString()); fileWriter.flush();
+				 * fileWriter.close();
+				 * 
+				 * } catch (IOException e) { e.printStackTrace(); }
+				 */
+				File file = new File("employeeData.txt");
+				PrintStream file1; 
 				try {
-					// Writing to a file
-					File file = new File("OrianaFile.Json");
-					file.createNewFile();
-					FileWriter fileWriter = new FileWriter(file);
-					fileWriter.write(countryObj.toString());
-					fileWriter.flush();
-					fileWriter.close();
+					if (!file.exists()) {
+						 file1 = new PrintStream(new File("employeeData.txt"));
+					} else {
+						 file1 = new PrintStream(file);
+					}
+					for (Student s : students) {
+						file1.println(s);
+					}
 
-				} catch (IOException e) {
-					e.printStackTrace();
+				} catch (IOException n) {
+					System.out.println("couldn't write");
 				}
 				System.exit(0);
 			}

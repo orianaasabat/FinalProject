@@ -1,0 +1,8 @@
+Student 
+ Name: m
+ Age:12
+ Grade:12
+ Address: 
+City: h
+ House number j 
+Street name g
