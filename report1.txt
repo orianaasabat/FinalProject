@@ -1,2 +1,1 @@
-1) Name: Marah ,Salary: 2000
-2) Name: oriana ,Salary: 2000
+1) Name: ro ,Salary: 33

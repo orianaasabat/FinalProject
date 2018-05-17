@@ -41,8 +41,8 @@ import javax.swing.JScrollBar;
 
 public class framee1 extends JFrame {
 	ArrayList<Person> persons = new ArrayList<Person>();
-	ArrayList<Student> students = new ArrayList<Student>();
-	ArrayList<Employee> employees = new ArrayList<Employee>();
+	static ArrayList<Student> students = new ArrayList<Student>();
+	static ArrayList<Employee> employees = new ArrayList<Employee>();
 
 	public static JLabel label_2;
 	public static JLabel label;
@@ -95,14 +95,65 @@ public class framee1 extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					ObjectMapper m = new ObjectMapper();
-					framee1 frame = new framee1();
-					frame.setVisible(true);
+					Scanner input = new Scanner (new File("StudentFile.txt"));
+					Scanner input1 = new Scanner (new File("EmployeeFile.txt")); 
+					
+					while(input.hasNext()) {
+						if(input!=null) {
+						int num = 0 ;
+						Student s = new Student();
+						String r =input.next();
+						s.setName(r);
+						String re = input.next();
+						int r1 = Integer.valueOf(re);
+						s.setAge(r1);
+					  int r2 = input.nextInt();
+						 s.setGrade(r2);
+						String r3 = input.next(); 
+						Address u = new Address();
+						u.setCity(r3);
+						 String r4 = input.next();
+						 u.setHouseNumber(r4);
+						 String r5 = input.next();
+						 u.setStreetName(r5);
+						 s.setAddress(u);
+						 students.add(s);
+						 
+					}
+					}
+				
+					while(input1.hasNext()) {
+						if(input1!=null) {
+						int num = 0 ;
+						Employee s = new Employee();
+						String r =input1.next();
+						s.setName(r);
+						String re = input1.next();
+						int r1 = Integer.valueOf(re);
+						s.setAge(r1);
+					  int r2 = input1.nextInt();
+						 s.setSalary(r2);
+						String r3 = input1.next(); 
+						Address u = new Address();
+						u.setCity(r3);
+						 String r4 = input1.next();
+						 u.setHouseNumber(r4);
+						 String r5 = input1.next();
+						 u.setStreetName(r5);
+						 s.setAddress(u);
+						 employees.add(s);
+				
+					}
+					}
+					input.close();
+					input1.close();
+						framee1 frame = new framee1();
+						frame.setVisible(true);
+					} catch(Exception e) {
+							e.printStackTrace();
+						}
 
-				} catch (Exception e) {
-					e.printStackTrace();
 				}
-			}
 		});
 	}// main
 
@@ -920,19 +971,43 @@ public class framee1 extends JFrame {
 		JButton btnExit = new JButton("Exit");
 		btnExit.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				/*
-				 * org.json.JSONObject countryObj = new org.json.JSONObject(); JSONArray
-				 * listOfStates = new JSONArray(); for (Person r : persons) {
-				 * listOfStates.put(r); } countryObj.put("Person2", listOfStates);
-				 * 
-				 * try { // Writing to a file File file = new File("OrianaFile.Json");
-				 * file.createNewFile(); FileWriter fileWriter = new FileWriter(file);
-				 * fileWriter.write(countryObj.toString()); fileWriter.flush();
-				 * fileWriter.close();
-				 * 
-				 * } catch (IOException e) { e.printStackTrace(); }
-				 */
-				
+
+				PrintStream f;
+							try {
+								f = new PrintStream(new File("StudentFile.txt"));
+								for(Student s : students ) {
+								f.println(s.getName());
+								String num1 = Integer.toString(s.getAge());
+								f.println(num1);
+								String num = Integer.toString(s.getGrade());
+								f.println(num);
+								f.println(s.getAddress().getCity());
+								f.println(s.getAddress().getHouseNumber());
+								f.println(s.getAddress().getStreetName());
+							}
+								PrintStream f2 = new PrintStream(new File("EmployeeFile.txt"));
+								for(Employee e : employees) {
+									f2.println(e.getName());
+									String num = Integer.toString(e.getAge());
+									f2.println(num);
+									String num1 = Integer.toString(e.getSalary());
+									f2.println(num1);
+									f2.println(e.getAddress().getCity());
+									f2.println(e.getAddress().getHouseNumber());
+									f2.println(e.getAddress().getStreetName());
+								}
+								PrintStream f3 = new PrintStream(new File("AdminFile.txt"));
+								Adminstrator a = new Adminstrator();
+								for(String t : Adminstrator.admin) {
+									f3.println(t);
+							
+								}
+							} catch (Exception e) {
+								
+								e.printStackTrace();
+							}
+								
+
 				System.exit(0);
 			}
 		});
