@@ -225,6 +225,9 @@ public class framee1 extends JFrame {
 		panel.add(btnSave_2);
 		btnSave_2.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				if (employeeage.getText().equals("") || employeesalary.getText().equals("")) {
+					JOptionPane.showMessageDialog(null, "Fill All information");
+				}else {
 				String name = employeename.getText();
 				String age = (employeeage.getText());
 				Integer age1 = Integer.valueOf(age);
@@ -236,12 +239,13 @@ public class framee1 extends JFrame {
 				Address u = new Address(city, street, house);
 				persons.add(new Employee(name, age1, u, salary));
 				employees.add(new Employee(name, age1, u, salary));
+				}
 			}
 
 		});
 
 		JPanel panel_1 = new JPanel();
-		tabbedPane.addTab("Add student", null, panel_1, null);
+		tabbedPane.addTab("Add Student", null, panel_1, null);
 		panel_1.setLayout(null);
 		panel_1.setBackground(Color.CYAN);
 		JLabel studentname = new JLabel("Name");
@@ -301,16 +305,21 @@ public class framee1 extends JFrame {
 		JButton btnSave_1 = new JButton("Add Student");
 		btnSave_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				String name = studentName.getText();
-				Integer age = Integer.valueOf(studentage.getText());
-				String city = studentcity.getText();
-				String street = studentstreet.getText();
-				String house = studenthouse.getText();
-				String grade1 = (studentgrade.getText());
-				Integer grade = Integer.valueOf(grade1);
-				Address f = new Address(city, street, house);
-				persons.add(new Student(name, age, f, grade));
-				students.add(new Student(name, age, f, grade));
+				if (studentage.getText().equals("") || studentgrade.getText().equals("")) {
+					JOptionPane.showMessageDialog(null, "Fill all information");
+				} else {
+					String name = studentName.getText();
+
+					Integer age = Integer.valueOf(studentage.getText());
+					String city = studentcity.getText();
+					String street = studentstreet.getText();
+					String house = studenthouse.getText();
+					String grade1 = (studentgrade.getText());
+					Integer grade = Integer.valueOf(grade1);
+					Address f = new Address(city, street, house);
+					persons.add(new Student(name, age, f, grade));
+					students.add(new Student(name, age, f, grade));
+				}
 			}
 		});
 		btnSave_1.setBounds(301, 303, 115, 29);
@@ -920,19 +929,7 @@ public class framee1 extends JFrame {
 		JButton btnExit = new JButton("Exit");
 		btnExit.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				/*
-				 * org.json.JSONObject countryObj = new org.json.JSONObject(); JSONArray
-				 * listOfStates = new JSONArray(); for (Person r : persons) {
-				 * listOfStates.put(r); } countryObj.put("Person2", listOfStates);
-				 * 
-				 * try { // Writing to a file File file = new File("OrianaFile.Json");
-				 * file.createNewFile(); FileWriter fileWriter = new FileWriter(file);
-				 * fileWriter.write(countryObj.toString()); fileWriter.flush();
-				 * fileWriter.close();
-				 * 
-				 * } catch (IOException e) { e.printStackTrace(); }
-				 */
-				
+
 				System.exit(0);
 			}
 		});
