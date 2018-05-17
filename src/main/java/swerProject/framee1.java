@@ -1,7 +1,10 @@
+
 package swerProject;
 
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.EventQueue;
+import java.awt.List;
 import java.awt.Window;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -12,13 +15,12 @@ import org.json.JSONArray;
 import javax.swing.JTabbedPane;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
-import java.io.BufferedReader;
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Vector;
 import java.awt.event.ActionEvent;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -26,10 +28,9 @@ import javax.swing.JTextField;
 import javax.swing.JRadioButton;
 import javax.swing.JTextArea;
 import javax.swing.JCheckBox;
-//import org.json.simple.parser.*;
-import org.json.JSONArray;
-import org.json.JSONObject;
-import org.json.*;
+import javax.swing.JTable;
+import javax.swing.JList;
+
 public class framee1 extends JFrame {
 	ArrayList<Person> persons = new ArrayList<Person>();
 	ArrayList<Student> students = new ArrayList<Student>();
@@ -77,29 +78,19 @@ public class framee1 extends JFrame {
 	private JTextField citytxt;
 	private JTextField housetxt;
 	private JTextField streettxt;
+	private JTable reportTable;
 
 	/**
 	 * Launch the application.
 	 */
-
-
 	public static void main(String[] args) {
-	//	JSONParser parser = new JSONParser();
-		
-		//JSONParser parser = new JSONParser();
-	     //try {
-	  //  	 Object obj = parser.parse(new FileReader("oriana.json"));
-	     //}
-	     //catch(Exception e ) {
-	    //	 e.printStackTrace();
-//	     }
-
 
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
 					framee1 frame = new framee1();
 					frame.setVisible(true);
+
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -111,13 +102,16 @@ public class framee1 extends JFrame {
 	 * Create the frame.
 	 */
 	public framee1() {
+		// getContentPane().setLayout(new FormLayout(new ColumnSpec[] {}, new RowSpec[]
+		// {}));
+
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 820, 705);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
-
+		getContentPane().setBackground(Color.CYAN);
 		JTabbedPane tabbedPane = new JTabbedPane(JTabbedPane.TOP);
 		tabbedPane.setToolTipText("Add Students");
 		tabbedPane.setBounds(15, 0, 783, 573);
@@ -126,7 +120,7 @@ public class framee1 extends JFrame {
 		JPanel panel_3 = new JPanel();
 		tabbedPane.addTab("Add an Adminstrator", null, panel_3, null);
 		panel_3.setLayout(null);
-
+		panel_3.setBackground(Color.CYAN);
 		username = new JTextField();
 		username.setBounds(267, 58, 146, 26);
 		panel_3.add(username);
@@ -146,7 +140,7 @@ public class framee1 extends JFrame {
 		password.setColumns(10);
 
 		JButton btnSave = new JButton("Add an Adminstrator");
-		btnSave.setBounds(267, 212, 146, 39);
+		btnSave.setBounds(250, 212, 188, 39);
 		btnSave.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				String username1 = username.getText();
@@ -176,7 +170,7 @@ public class framee1 extends JFrame {
 		JLabel lblAge_1 = new JLabel("Age");
 		lblAge_1.setBounds(179, 58, 69, 20);
 		panel.add(lblAge_1);
-
+		panel.setBackground(Color.CYAN);
 		employeeage = new JTextField();
 		employeeage.setBounds(258, 56, 146, 26);
 		panel.add(employeeage);
@@ -239,9 +233,9 @@ public class framee1 extends JFrame {
 		});
 
 		JPanel panel_1 = new JPanel();
-		tabbedPane.addTab("add student", null, panel_1, null);
+		tabbedPane.addTab("Add student", null, panel_1, null);
 		panel_1.setLayout(null);
-
+		panel_1.setBackground(Color.CYAN);
 		JLabel studentname = new JLabel("Name");
 		studentname.setBounds(216, 19, 41, 20);
 		panel_1.add(studentname);
@@ -318,6 +312,7 @@ public class framee1 extends JFrame {
 		final JPanel panel_2_1 = new JPanel();
 		tabbedPane.addTab("Search", null, panel_2_1, null);
 		panel_2_1.setLayout(null);
+		panel_2_1.setBackground(Color.CYAN);
 		final JButton search = new JButton("Search");
 		search.setBounds(222, 43, 115, 29);
 		panel_2_1.add(search);
@@ -398,40 +393,39 @@ public class framee1 extends JFrame {
 								matchingEmployees.add(e1);
 						}
 						if (e.getSource() == search) {
-							y = i;
-							write = new JTextArea();
-							write.setBounds(33, 116, 244, 157);
-							contentPane.add(write);
-							write.setColumns(10);
-							String h = matchingEmployees.get(i) + " ";
-							System.out.println(h);
-							write.setText(h);
+							if (matchingEmployees.size() == 0) {
+								JOptionPane.showMessageDialog(null, "There are no other matching users for this name.");
+							} else {
+								y = i;
+								write = new JTextArea();
+								write.setBounds(33, 116, 244, 157);
+								contentPane.add(write);
+								write.setColumns(10);
+								String h = matchingEmployees.get(i) + " ";
+								// System.out.println(h);
+								write.setText(h);
 
-							next.setBounds(215, 366, 91, 23);
-							panel_2_1.add(next);
-							next.addActionListener(new ActionListener() {
-								public void actionPerformed(ActionEvent e) {
-									if (e.getSource() == next) {
-										try {
-											i++;
-											String h = matchingEmployees.get(i) + " ";
-											write.setText(h);
+								next.setBounds(215, 366, 91, 23);
+								panel_2_1.add(next);
+								next.addActionListener(new ActionListener() {
+									public void actionPerformed(ActionEvent e) {
+										if (e.getSource() == next) {
+											try {
+												i++;
+												String h = matchingEmployees.get(i) + " ";
+												write.setText(h);
 
-										} catch (Exception e5) {
-											defaultframe t = new defaultframe();
-											JLabel labelerror = new JLabel(
-													"There are no other matching users for this name.");
-											labelerror.setBounds(15, 221, 520, 73);
-											t.getContentPane().add(labelerror);
-											t.setVisible(true);
+											} catch (Exception e5) {
+												JOptionPane.showMessageDialog(null,
+														"There are no other matching users for this name.");
+
+											}
 										}
 									}
 
-								}
-
-							});
+								});
+							}
 						}
-
 						final JButton update2 = new JButton("Update information");
 						update2.setBounds(41, 366, 183, 23);
 						panel_2_1.add(update2);
@@ -500,7 +494,7 @@ public class framee1 extends JFrame {
 
 		});
 
-		employeeCheck.setBounds(10, 7, 85, 29);
+		employeeCheck.setBounds(10, 7, 92, 29);
 		panel_2_1.add(employeeCheck);
 
 		final JRadioButton student = new JRadioButton("student");
@@ -516,41 +510,41 @@ public class framee1 extends JFrame {
 							}
 
 							if (e.getSource() == search) {
-								y = i;
-								write = new JTextArea();
-								write.setBounds(33, 116, 244, 157);
-								contentPane.add(write);
-								write.setColumns(10);
-								String h = matchingStudents.get(i) + " ";
-								write.setText(h);
+								if (matchingStudents.size() == 0) {
+									JOptionPane.showMessageDialog(null,
+											"There are no other matching users for this name.");
+								} else {
+									y = i;
+									write = new JTextArea();
+									write.setBounds(33, 116, 244, 157);
+									contentPane.add(write);
+									write.setColumns(10);
+									String h = matchingStudents.get(i) + " ";
+									write.setText(h);
 
-								next.setBounds(215, 366,91, 23);
-								panel_2_1.add(next);
-								next.addActionListener(new ActionListener() {
-									public void actionPerformed(ActionEvent e) {
-										if (e.getSource() == next) {
-											try {
-												i++;
-												String h = matchingStudents.get(i) + " ";
-												write.setText(h);
+									next.setBounds(215, 366, 91, 23);
+									panel_2_1.add(next);
+									next.addActionListener(new ActionListener() {
+										public void actionPerformed(ActionEvent e) {
+											if (e.getSource() == next) {
+												try {
+													i++;
+													String h = matchingStudents.get(i) + " ";
+													write.setText(h);
 
-											} catch (Exception e5) {
-												defaultframe t = new defaultframe();
-												JLabel labelerror = new JLabel(
-														"There is no other matching users for this name.");
-												labelerror.setBounds(15, 221, 520, 73);
-												t.getContentPane().add(labelerror);
-												t.setVisible(true);
+												} catch (Exception e5) {
+													JOptionPane.showMessageDialog(null,
+															"There are no other matching users for this name.");
+												}
 											}
+
 										}
 
-									}
-
-								});
+									});
+								}
 							}
-
 							final JButton update2 = new JButton("Update information");
-							update2.setBounds(41, 366, 91, 23);
+							update2.setBounds(41, 366, 183, 23);
 							panel_2_1.add(update2);
 
 							update2.addActionListener(new ActionListener() {
@@ -617,7 +611,7 @@ public class framee1 extends JFrame {
 
 		});
 
-		student.setBounds(97, 7, 69, 29);
+		student.setBounds(104, 7, 69, 29);
 		panel_2_1.add(student);
 
 		JRadioButton unl = new JRadioButton("Both");
@@ -631,42 +625,43 @@ public class framee1 extends JFrame {
 							if ((name.getText()).equals(e1.getName()))
 								matchingPersons.add(e1);
 						}
+
 						if (e.getSource() == search) {
-							y = i;
-							write = new JTextArea();
-							write.setBounds(33, 116, 244, 157);
-							contentPane.add(write);
-							write.setColumns(10);
-							String h = matchingPersons.get(i) + " ";
-							write.setText(h);
+							if (matchingPersons.size() == 0) {
+								JOptionPane.showMessageDialog(null, "There are no other matching users for this name.");
+							} else {
+								y = i;
+								write = new JTextArea();
+								write.setBounds(33, 116, 244, 157);
+								contentPane.add(write);
+								write.setColumns(10);
+								String h = matchingPersons.get(i) + " ";
+								write.setText(h);
 
-							next.setBounds(215, 366, 91, 23);
-							panel_2_1.add(next);
-							next.addActionListener(new ActionListener() {
-								public void actionPerformed(ActionEvent e) {
-									if (e.getSource() == next) {
-										try {
-											i++;
-											String h = matchingPersons.get(i) + " ";
-											write.setText(h);
+								next.setBounds(215, 366, 91, 23);
+								panel_2_1.add(next);
+								next.addActionListener(new ActionListener() {
+									public void actionPerformed(ActionEvent e) {
+										if (e.getSource() == next) {
+											try {
+												i++;
+												String h = matchingPersons.get(i) + " ";
+												write.setText(h);
 
-										} catch (Exception e5) {
-											defaultframe t = new defaultframe();
-											JLabel labelerror = new JLabel(
-													"There are no other matching users for this name.");
-											labelerror.setBounds(15, 221, 520, 73);
-											t.getContentPane().add(labelerror);
-											t.setVisible(true);
+											} catch (Exception e5) {
+												JOptionPane.showMessageDialog(null,
+														"There are no other matching users for this name.");
+											}
 										}
+
 									}
 
-								}
-
-							});
+								});
+							}
 						}
 
 						final JButton update2 = new JButton("Update information");
-						update2.setBounds(41, 366, 91, 23);
+						update2.setBounds(41, 366, 183, 23);
 						panel_2_1.add(update2);
 
 						update2.addActionListener(new ActionListener() {
@@ -740,7 +735,7 @@ public class framee1 extends JFrame {
 
 		});
 
-		unl.setBounds(168, 7, 58, 29);
+		unl.setBounds(175, 7, 58, 29);
 		panel_2_1.add(unl);
 		JLabel lblName_1 = new JLabel("Name");
 		lblName_1.setBounds(10, 48, 69, 20);
@@ -752,113 +747,123 @@ public class framee1 extends JFrame {
 		name.setColumns(10);
 		final JPanel panel_4 = new JPanel();
 		tabbedPane.addTab("Report", null, panel_4, null);
+
 		panel_4.setLayout(null);
 		salarytxt = new JTextField();
 		salarytxt.setBounds(13, 93, 146, 26);
 		panel_4.add(salarytxt);
 		salarytxt.setColumns(10);
-		final JLabel salary = new JLabel("");
-		salary.setBounds(164, 103, 69, 20);
-		panel_4.add(salary);
+		final JLabel salary_1 = new JLabel("");
+		salary_1.setBounds(43, 67, 69, 20);
+		panel_4.add(salary_1);
+		final JButton reportbtn1 = new JButton("Report");
+		reportbtn1.setBounds(179, 92, 115, 29);
+		panel_4.add(reportbtn1);
+		final JTextField reportedtxt = new JTextField();
+		reportedtxt.setBounds(444, 151, 400, 26);
+		panel_4.add(reportedtxt);
+
+		reportedtxt.setColumns(10);
+		reportedtxt.setVisible(false);
 		final JCheckBox employeeReport = new JCheckBox("Report Employees");
-		employeeReport.addActionListener(new ActionListener() {
-
-			public void actionPerformed1(ActionEvent e) {
-				if (e.getSource() == employeeReport) {
-					salary.setText("salary");
-
-					String repo = salarytxt.getText();
-					Double report = Double.valueOf(repo);
-					final ArrayList<Employee> reportedEmployee = new ArrayList<Employee>();
-
-					for (Employee h : employees) {
-						if (h.getSalary() > report) {
-							reportedEmployee.add(h);
-						} // if
-					} // for
-					for (final Employee o : reportedEmployee) {
-						final JButton next = new JButton("next");
-						next.setBounds(528, 409, 115, 29);
-						panel_4.add(next);
-						next.addActionListener(new ActionListener() {
-							public void actionPerformed(ActionEvent e) {
-								if (e.getSource() == next) {
-									JTextField reportedtxt = new JTextField();
-									reportedtxt.setBounds(444, 151, 400, 26);
-									panel_4.add(reportedtxt);
-									reportedtxt.setColumns(10);
-									reportedtxt.setText("name is " + reportedEmployee.get(w).getName()
-											+ " his / her salary " + reportedEmployee.get(w).getSalary());
-									next.setEnabled(false);
-									w++;
-
-								}
-								if (w == reportedEmployee.size()) {
-									next.setEnabled(false);
-									return;
-								}
-								next.setEnabled(true);
-							}
-						});
-
-					} // for
-				} // else if 1
-			}
-
+		reportbtn1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				employeeReport.addActionListener(new ActionListener() {
+					public void actionPerformed(ActionEvent e) {
+						if (e.getSource() == employeeReport) {
+							salary_1.setText("Salary");
+
+							final ArrayList<Employee> reportedEmployee = new ArrayList<Employee>();
+							int report = Integer.parseInt(salarytxt.getText());
+							if (employees.size() != 0) {
+								for (Employee h : employees) {
+									if (h.getSalary() > report) {
+										reportedEmployee.add(h);
+									} // if
+								} // for
+								for (final Employee o : reportedEmployee) {
+									if (e.getSource() == reportbtn1) {
+										reportedtxt.setVisible(true);
+										reportedtxt.setEditable(false);
+										reportedtxt.setText("Name: " + reportedEmployee.get(w).getName() + " , Salary "
+												+ reportedEmployee.get(w).getSalary());
+										reportbtn1.setEnabled(false);
+										w++;
+
+									}
+									if (w == reportedEmployee.size()) {
+										reportbtn1.setEnabled(false);
+
+										return;
+									}
+									reportbtn1.setEnabled(true);
+
+								} // for
+							} else {
+								JOptionPane.showMessageDialog(null,
+										"There are no Employees that have salary higher than " + report);
+							}
+						}
+					}
+				});
 
 			}
 		});
-		employeeReport.setBounds(6, 11, 235, 23);
+		employeeReport.setBounds(6, 11, 153, 23);
 		panel_4.add(employeeReport);
+		panel_4.setBackground(Color.CYAN);
 
 		final JCheckBox studentReport = new JCheckBox("Report Students");
 		studentReport.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				if (e.getSource() == studentReport) {
-					salary.setText("grade");
-					String grade1 = salarytxt.getText();
-					Double grade = Double.valueOf(grade1);
-					final ArrayList<Student> reportedstuden = new ArrayList<Student>();
+					salary_1.setText("Grade");
+					reportbtn1.addActionListener(new ActionListener() {
+						public void actionPerformed(ActionEvent e) {
+							int grade = Integer.parseInt(salarytxt.getText());
+							final ArrayList<Student> reportedstudent = new ArrayList<Student>();
+							if (students.size() != 0) {
+								for (Student h : students) {
+									if (h.getGrade() > grade) {
+										reportedstudent.add(h);
+									} // if
+								} // for
 
-					for (Student h : students) {
-						if (h.getGrade() > grade) {
-							reportedstuden.add(h);
-						} // if
-					} // for
-					for (final Student o : reportedstuden) {
-						final JButton next = new JButton("next");
-						next.setBounds(528, 409, 115, 29);
-						panel_4.add(next);
-						next.addActionListener(new ActionListener() {
-							public void actionPerformed(ActionEvent e) {
-								if (e.getSource() == next) {
-									JTextField reportedtxt = new JTextField();
-									reportedtxt.setBounds(444, 151, 400, 26);
+								for (final Student o : reportedstudent) {
 
-									panel_4.add(reportedtxt);
-									reportedtxt.setColumns(10);
-									reportedtxt.setText("name is " + reportedstuden.get(w).getName()
-											+ " his / her grade " + reportedstuden.get(w).getGrade());
-									next.setEnabled(false);
-									w++;
+									if (e.getSource() == reportbtn1) {
+										reportedtxt.setEditable(false);
+										reportedtxt.setVisible(true);
+										reportedtxt.setText("Name: " + reportedstudent.get(w).getName() + " , Grade "
+												+ reportedstudent.get(w).getGrade());
+										reportbtn1.setEnabled(false);
+										w++;
 
-								}
-								if (w == reportedstuden.size()) {
-									next.setEnabled(false);
-									return;
-								}
-								next.setEnabled(true);
-							}
-						});
+									}
+									if (w == reportedstudent.size()) {
+										reportbtn1.setEnabled(false);
 
-					} // for
-				} // else if 1
+										return;
+									}
+									reportbtn1.setEnabled(true);
+
+								} // for
+
+							} // for
+							else {
+								JOptionPane.showMessageDialog(null,
+										"There are no Students that have grades higher than " + grade);
+							} // else if 1
+
+						}
+					});
+				}
+
 			}
-
 		});
 		studentReport.setBounds(6, 37, 153, 23);
 		panel_4.add(studentReport);
+
 		JButton btnExit = new JButton("Exit");
 		btnExit.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
@@ -881,33 +886,6 @@ public class framee1 extends JFrame {
 				} catch (IOException e) {
 					e.printStackTrace();
 				}
-				FileReader read;
-				try {
-					read = new FileReader("OrianaFile.json");
-					BufferedReader reader = new BufferedReader(read);
-					
-					String text = " ";
-					String line;
-					try {
-						line = reader.readLine();
-						while (line!=null) {
-							text += line;
-						line = reader.readLine();
-					
-					/*	if(line.contains("Employee")) {
-							
-						}*/
-					}
-					} catch (IOException e) {
-					
-						e.printStackTrace();
-					}
-					System.out.println(text);
-					System.out.println();
-				} catch (FileNotFoundException e) {
-					
-					e.printStackTrace();
-				}
 				System.exit(0);
 			}
 		});
@@ -925,7 +903,3 @@ public class framee1 extends JFrame {
 		setContentPane(contentPane);
 	}
 }
-
-
-
-
