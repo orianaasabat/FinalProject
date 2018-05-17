@@ -1,1 +1,0 @@
-{"Person2":["Employee\n Name: m\n Salary:12,  \n Age: 12\n Address: \nCity: 12\n House number 21 \nStreet name 21","Student \n Name: marah1\n Age:12\n Grade:12\n Address: \nCity: 2\n House number 1 \nStreet name 2"]}

@@ -932,21 +932,7 @@ public class framee1 extends JFrame {
 				 * 
 				 * } catch (IOException e) { e.printStackTrace(); }
 				 */
-				File file = new File("employeeData.txt");
-				PrintStream file1; 
-				try {
-					if (!file.exists()) {
-						 file1 = new PrintStream(new File("employeeData.txt"));
-					} else {
-						 file1 = new PrintStream(file);
-					}
-					for (Student s : students) {
-						file1.println(s);
-					}
-
-				} catch (IOException n) {
-					System.out.println("couldn't write");
-				}
+				
 				System.exit(0);
 			}
 		});
