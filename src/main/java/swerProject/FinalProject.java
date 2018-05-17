@@ -84,6 +84,8 @@ public class FinalProject extends JFrame {
 					if (uname.concat(pass).equals(a1)) {
 						framee1 y = new framee1();
 						y.setVisible(true);
+					exist = true ;
+					
 					} // if
 				} // for
 				if (!exist) {
